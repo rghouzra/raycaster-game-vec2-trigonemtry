@@ -28,5 +28,4 @@ extern int map[MAP_H][MAP_W];
 void read_map(t_raycast *data);
 void raycast(t_raycast *ptr);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void dda(t_raycast *ptr, double x1, double y1, double x2, double y2);
 #endif
