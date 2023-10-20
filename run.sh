@@ -5,16 +5,22 @@ if [ "$1" == "clean" ]; then
 	rm -rf executable
 else
 	echo compiling...
-	export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm"
-	export lib="libmlx.a"
-	export inc="-I /Users/redaghouzraf/Downloads/minilibx_opengl_20191021/"
+	export bool="false"
+	if [ $(users) == "redaghouzraf" ]; then
+		export bool="true"
+		cp /Users/redaghouzraf/Downloads/minilibx_opengl_20191021/libmlx.a .
+		export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm"
+		export lib="libmlx.a"
+		export inc="-I /Users/redaghouzraf/Downloads/minilibx_opengl_20191021/"
+	fi
 	if [ $(uname) == "Darwin" ]; then
 		echo "working"
-		unset inc
-		unset lib
-		export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm -lmlx -fsanitize=signed-integer-overflow"
+		export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm"
+		if [ $bool == "false" ]; then
+			export FLAGS+=" -lmlx"
+		fi
 	fi
-	clang main.c raycast.c ray_utils.c vector_utils.c $lib $FLAGS -o executable
+	clang main.c raycast.c ray_utils.c vector_utils.c $inc $lib $FLAGS -o executable
 	unset FLAGS
 	unset inc
 	unset lib
