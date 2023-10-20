@@ -9,18 +9,29 @@ void init(t_vec2 *pos, t_vec2 *dir, t_vec2 *plane){
 	plane->cord.y = 0.66;
 }
 
-void dda(){
+void dda(t_raycast *p){
 	double x1 = 10,y1 = 10;
 	double x2 = 400,y2 = 400;
 	double dx = x2 - x1, dy = y2 - y1;
-	
+	double steps = (fabs(dx) > fabs(dy) ) ? dx : dy;
+	if(steps == 0)
+		return ;
+	double xinc = dx / (float)steps;
+	double yinc = dy / (float)steps;
+	for(int i = 0; i < steps; i++){
+		my_mlx_pixel_put(&p->img, x1, y1, 0x00ff00);
+		printf("%f\t%f\n", x1, y1);
+		x1+=xinc;
+		y1+=yinc;
+	}
 }
 
 void	raycast(t_raycast *ptr){
 	int x;
 	t_vec2 pos, dir, plane;
 	
-	dda();
+	dda(ptr);
+	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
 	return ;
 	init(&pos,&dir,&plane);
 	x = 0;
