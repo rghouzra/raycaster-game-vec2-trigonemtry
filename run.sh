@@ -17,7 +17,7 @@ else
 		echo "working"
 		export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm"
 		if [ $bool == "false" ]; then
-			export FLAGS+=" -lmlx -D INC=0"
+			export FLAGS+=" -lmlx -DINC=0"
 		fi
 	fi
 	clang main.c raycast.c ray_utils.c draw_utils.c vector_utils.c $inc $lib $FLAGS -o executable

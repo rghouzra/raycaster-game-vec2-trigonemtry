@@ -32,10 +32,12 @@ void clear(t_raycast *h, int color)
 	}
 	mlx_put_image_to_window(h->ptr, h->ptr_win,h->img.img,0, 0);
 }
+
 int main()
 {
 	t_raycast *holder;
 
+	printf("%d\n", INC);
 	holder = malloc(sizeof(t_raycast));
 	if(!holder)
 		return 1;

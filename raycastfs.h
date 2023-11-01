@@ -3,10 +3,10 @@
 #ifndef INC
 #define INC 1
 #endif
-#ifdef INC
-# include "/Users/redaghouzraf/Downloads/minilibx_opengl_20191021/mlx.h"
+#if(INC)
+	# include "/Users/redaghouzraf/Downloads/minilibx_opengl_20191021/mlx.h"
 #else
-#include "mlx.h"
+	#include "mlx.h"
 #endif
 # include <stdlib.h>
 # include <math.h>
