@@ -27,11 +27,17 @@ void dda(t_raycast *p, double x1, double y1,double x2,  double y2){
 void	raycast(t_raycast *ptr){
 	int x;
 	t_vec2 pos, dir, plane;
-	
-	// dda(ptr, 0, 0, 100, 100);
-	// mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
-	// return ;
-	init(&pos,&dir,&plane);
+
+	// init(&pos,&dir,&plane);
+	for(int i = 0; i <MAP_H;i++){
+		for (size_t j = 0; j < MAP_H; j++)
+		{
+			if(map[i][j] == 1)  fillrec(ptr, (t_cord){j*16, i*16},(t_cord){16, 16}, 0x1ff );
+		}
+		
+	}
+	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win, ptr->img.img, 0, 0);
+	return ;
 	x = 0;
 	while (x < WIDTH){
 		t_vec2 ray;

@@ -1,6 +1,13 @@
 #ifndef RAYCASTFS_H
 # define RAYCASTFS_H
-# include "mlx.h"
+#ifndef INC
+#define INC 1
+#endif
+#ifdef INC
+# include "/Users/redaghouzraf/Downloads/minilibx_opengl_20191021/mlx.h"
+#else
+#include "mlx.h"
+#endif
 # include <stdlib.h>
 # include <math.h>
 # include <libc.h>
@@ -26,6 +33,8 @@ typedef struct	s_raycast {
 }t_raycast;
 extern int map[MAP_H][MAP_W];
 void read_map(t_raycast *data);
+void clear_screen(t_raycast *ptr, unsigned int color);
+void fillrec(t_raycast *ptr, t_cord begin ,t_cord end, int color);
 void raycast(t_raycast *ptr);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif

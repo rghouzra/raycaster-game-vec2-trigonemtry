@@ -21,6 +21,17 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void clear(t_raycast *h, int color)
+{
+	for (size_t i = 0; i < HEIGHT; i++)
+	{
+		for (size_t j = 0; j< WIDTH;j++)
+		{
+			my_mlx_pixel_put(&h->img, j, i, color);
+		}
+	}
+	mlx_put_image_to_window(h->ptr, h->ptr_win,h->img.img,0, 0);
+}
 int main()
 {
 	t_raycast *holder;
@@ -33,7 +44,7 @@ int main()
 	holder->img.img = mlx_new_image(holder->ptr, WIDTH, HEIGHT);
 	holder->img.addr = mlx_get_data_addr(holder->img.img, &holder->img.bits_per_pixel, \
 	&holder->img.line_length, &holder->img.endian);
-	mlx_put_image_to_window(holder->ptr, holder->ptr_win,holder->img.img, 0, 0);
+	// mlx_put_image_to_window(holder->ptr, holder->ptr_win,holder->img.img, 0, 0);
 	raycast(holder);
 	mlx_loop(holder->ptr);
 	free(holder);
