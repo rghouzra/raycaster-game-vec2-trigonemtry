@@ -1,7 +1,7 @@
 #ifndef RAYCASTFS_H
 # define RAYCASTFS_H
 #ifndef INC
-#define INC !__APPLE__
+#define INC !__x86_64
 #endif
 #if(INC)
 	# include "/Users/redaghouzraf/Downloads/minilibx_opengl_20191021/mlx.h"

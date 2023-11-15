@@ -20,7 +20,7 @@ else
 			export FLAGS+=" -lmlx -DINC=0"
 		fi
 	fi
-	clang main.c raycast.c ray_utils.c draw_utils.c vector_utils.c $inc $lib $FLAGS -o executable
+	clang -fsanitize=address main.c raycast.c ray_utils.c draw_utils.c vector_utils.c $inc $lib $FLAGS -o executable
 	unset FLAGS
 	unset inc
 	unset lib
