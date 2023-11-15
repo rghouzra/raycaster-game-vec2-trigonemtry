@@ -13,8 +13,8 @@
 # include <libc.h>
 # include "ray.h"
 # include <stdio.h>
-# define WIDTH 700
-# define HEIGHT 1000
+# define WIDTH 800
+# define HEIGHT 800
 # define MAP_H 10
 # define MAP_W 7
 
@@ -36,5 +36,6 @@ void read_map(t_raycast *data);
 void clear_screen(t_raycast *ptr, unsigned int color);
 void fillrec(t_raycast *ptr, t_cord begin ,t_cord end, int color);
 void raycast(t_raycast *ptr);
+void dda(t_raycast *ptr, t_cord begin, t_cord end);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif

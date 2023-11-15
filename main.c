@@ -2,14 +2,14 @@
 
 int map[MAP_H][MAP_W] = {
 	{1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0},
-	{1,0,0,1,0,0,0},
-	{1,0,0,1,0,0,0},
-	{1,0,0,0,0,1,0},
-	{1,0,0,0,0,0,0},
-	{1,0,0,0,0,0,0},
-	{1,0,1,0,0,0,0},
-	{1,0,0,0,0,0,0},
+	{1,0,0,0,0,0,1},
+	{1,0,0,1,0,0,1},
+	{1,0,0,1,0,0,1},
+	{1,0,0,0,0,1,1},
+	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1},
+	{1,0,1,0,0,0,1},
+	{1,0,0,0,0,0,1},
 	{1,1,1,1,1,1,1},
 };
 
@@ -25,8 +25,7 @@ void clear(t_raycast *h, int color)
 {
 	for (size_t i = 0; i < HEIGHT; i++)
 	{
-		for (size_t j = 0; j< WIDTH;j++)
-		{
+		for (size_t j = 0; j< WIDTH;j++){
 			my_mlx_pixel_put(&h->img, j, i, color);
 		}
 	}
@@ -46,7 +45,8 @@ int main()
 	holder->img.img = mlx_new_image(holder->ptr, WIDTH, HEIGHT);
 	holder->img.addr = mlx_get_data_addr(holder->img.img, &holder->img.bits_per_pixel, \
 	&holder->img.line_length, &holder->img.endian);
-	// mlx_put_image_to_window(holder->ptr, holder->ptr_win,holder->img.img, 0, 0);
+	// dda(holder, (t_cord){0, 500},(t_cord){500, 500});
+	mlx_put_image_to_window(holder->ptr, holder->ptr_win,holder->img.img, 0, 0);
 	raycast(holder);
 	mlx_loop(holder->ptr);
 	free(holder);
