@@ -24,7 +24,11 @@ void	raycast(t_raycast *ptr){
 	t_vec2 pos, dir, plane;
 	t_vec2 *cords[3] = {&pos, &dir, &plane};
 	init(cords);
-	debug_draw_ray(ptr, (t_ray){pos, dir});
+	int x = 0;
+	while(x < WIDTH){
+
+		debug_draw_ray(ptr, (t_ray){pos, dir});
+	}
 	// debug_draw_camera(ptr, cords);
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
 }

@@ -60,6 +60,13 @@
 		"unordered_map": "cpp",
 		"utility": "cpp",
 		"vector": "cpp",
-		"raycastfs.h": "c"
+		"raycastfs.h": "c",
+		"math.h": "c",
+		"ray.h": "c",
+		"libc.h": "c",
+		"vm_types.h": "c",
+		"kern_return.h": "c",
+		"boolean.h": "c",
+		"ioctl.h": "c"
 	}
 }
