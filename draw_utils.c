@@ -5,22 +5,22 @@ void dda(t_raycast *ptr, t_cord begin, t_cord end){
 	double m;
 	int xinc, yinc;
 	int i, steps;
-	dx = end.x - begin.x;
-	dy = end.y - begin.y;
-	m = dy / (dx == 0? 1 : dx);
-	if(m > 1){
-		xinc = dx / dy;
-		yinc = dy / dy;
-		steps = dy;
+
+	dx = (end.x - begin.x);
+	dy = (end.y - begin.y);
+	if(fabs(dy) > fabs(dx)){
+		xinc = dx / fabs(dy);
+		yinc = dy / fabs(dy);
+		steps = fabs(dy);
 	}else{
-		steps = dx;
-		xinc = dx / dx;
-		yinc = dy / dx;
+		steps = fabs(dx);
+		xinc = dx / fabs(dx);
+		yinc = dy / fabs(dx);
 	}
 	i = 0;
 	while(i < steps){
 		my_mlx_pixel_put(&ptr->img, begin.x, begin.y, 0xffffff);
-		// printf("%d\t%d\n", begin.x, begin.y);
+		// printf("%f\t%f\n", begin.x, begin.y);
 		begin.x +=xinc;
 		begin.y +=yinc;
 		i++;
