@@ -1,4 +1,4 @@
 all:
 	bash run.sh
 clean:
-	rm executable
+	bash run.sh clean
