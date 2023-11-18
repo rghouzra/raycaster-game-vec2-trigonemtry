@@ -1,25 +1,26 @@
 #include "raycastfs.h"
 
-void dda(t_raycast *ptr, t_cord begin, t_cord end){
-	int dx, dy;
+void dda(t_raycast *ptr, t_cord begin, t_cord end, int color){
+	double dx, dy;
 	double m;
-	int xinc, yinc;
+	double xinc, yinc;
 	int i, steps;
 
 	dx = (end.x - begin.x);
 	dy = (end.y - begin.y);
-	if(fabs(dy) > fabs(dx)){
-		xinc = dx / fabs(dy);
-		yinc = dy / fabs(dy);
-		steps = fabs(dy);
+	if(abs(dy) > abs(dx)){
+		xinc = dx / (double)abs(dy);
+		yinc = dy / (double)abs(dy);
+		steps = abs(dy);
 	}else{
-		steps = fabs(dx);
-		xinc = dx / fabs(dx);
-		yinc = dy / fabs(dx);
+		steps = abs(dx);
+		xinc = dx / (double)abs(dx);
+		yinc = dy / (double)abs(dx);
 	}
 	i = 0;
-	while(i < steps){
-		my_mlx_pixel_put(&ptr->img, begin.x, begin.y, 0xffffff);
+	static int j;
+	while(i <= steps){
+		my_mlx_pixel_put(&ptr->img, round(begin.x), round(begin.y), color);
 		// printf("%f\t%f\n", begin.x, begin.y);
 		begin.x +=xinc;
 		begin.y +=yinc;

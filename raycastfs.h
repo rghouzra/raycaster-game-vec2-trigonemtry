@@ -1,5 +1,8 @@
 #ifndef RAYCASTFS_H
 # define RAYCASTFS_H
+#ifndef __x86_64 
+#define __x86_64 0
+#endif
 #ifndef INC
 #define INC !__x86_64
 #endif
@@ -36,6 +39,6 @@ void read_map(t_raycast *data);
 void clear_screen(t_raycast *ptr, unsigned int color);
 void fillrec(t_raycast *ptr, t_cord begin ,t_cord end, int color);
 void raycast(t_raycast *ptr);
-void dda(t_raycast *ptr, t_cord begin, t_cord end);
+void dda(t_raycast *ptr, t_cord begin, t_cord end, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif

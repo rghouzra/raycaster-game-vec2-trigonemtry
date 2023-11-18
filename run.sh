@@ -9,7 +9,7 @@ else
 	if [ $(users) == "redaghouzraf" ]; then
 		export bool="true"
 		cp /Users/redaghouzraf/Downloads/minilibx_opengl_20191021/libmlx.a .
-		export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm"
+		export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm -fsanitize=address"
 		export lib="libmlx.a"
 		export inc="-I /Users/redaghouzraf/Downloads/minilibx_opengl_20191021/"
 	fi
