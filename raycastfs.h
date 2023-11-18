@@ -29,13 +29,23 @@ typedef struct	s_data {
 	int		endian;
 }	t_data;
 
+typedef struct s_camera{
+	t_vec2 pos;
+	t_vec2 dir;
+	t_vec2 plane;
+}t_camera;
+
 typedef struct	s_raycast {
 	void *ptr;
 	void *ptr_win;
+	t_camera camera;
 	t_data img;
 }t_raycast;
+
+
 extern int map[MAP_H][MAP_W];
 void read_map(t_raycast *data);
+int key_press(int keycode, void *p);
 void clear_screen(t_raycast *ptr, unsigned int color);
 void fillrec(t_raycast *ptr, t_cord begin ,t_cord end, int color);
 void raycast(t_raycast *ptr);

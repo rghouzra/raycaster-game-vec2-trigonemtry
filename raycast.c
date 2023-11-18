@@ -31,7 +31,9 @@ void	raycast(t_raycast *ptr){
 	t_ray ray;
 	t_vec2 *cords[3] = {&pos, &dir, &plane};
 	double planx;
-	init(cords);
+	pos = ptr->camera.pos;
+	dir = ptr->camera.dir;
+	plane = ptr->camera.plane;
 	int x = 0;
 	ray.origin = pos;
 	// debug_draw_player(ptr, cords);

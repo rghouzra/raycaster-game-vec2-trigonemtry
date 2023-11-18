@@ -32,11 +32,17 @@ void clear(t_raycast *h, int color)
 	mlx_put_image_to_window(h->ptr, h->ptr_win,h->img.img,0, 0);
 }
 
+void init_camera(t_camera *camera){
+	camera->pos.cord = (t_cord){WIDTH / 2, HEIGHT / 2};
+	camera->dir.cord = (t_cord){-1, 0};
+	camera->plane.cord = (t_cord){0, 0.66};
+}
+
+
 int main()
 {
 	t_raycast *holder;
 
-	printf("%d\n", INC);
 	holder = malloc(sizeof(t_raycast));
 	if(!holder)
 		return 1;
@@ -45,7 +51,10 @@ int main()
 	holder->img.img = mlx_new_image(holder->ptr, WIDTH, HEIGHT);
 	holder->img.addr = mlx_get_data_addr(holder->img.img, &holder->img.bits_per_pixel, \
 	&holder->img.line_length, &holder->img.endian);
+	init_camera(&holder->camera);
 	raycast(holder);
+	mlx_key_hook(holder->ptr_win, key_press, holder);
+	// mlx_hook(holder->ptr_win, 2, 1L<<0, key_press, holder);
 	mlx_loop(holder->ptr);
 	free(holder);
 	return 0;

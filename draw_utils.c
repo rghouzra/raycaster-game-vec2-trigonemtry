@@ -8,14 +8,14 @@ void dda(t_raycast *ptr, t_cord begin, t_cord end, int color){
 
 	dx = (end.x - begin.x);
 	dy = (end.y - begin.y);
-	if(abs(dy) > abs(dx)){
-		xinc = dx / (double)abs(dy);
-		yinc = dy / (double)abs(dy);
-		steps = abs(dy);
+	if(fabs(dy) > fabs(dx)){
+		xinc = dx / (double)fabs(dy);
+		yinc = dy / (double)fabs(dy);
+		steps = fabs(dy);
 	}else{
-		steps = abs(dx);
-		xinc = dx / (double)abs(dx);
-		yinc = dy / (double)abs(dx);
+		steps = fabs(dx);
+		xinc = dx / (double)fabs(dx);
+		yinc = dy / (double)fabs(dx);
 	}
 	i = 0;
 	static int j;
