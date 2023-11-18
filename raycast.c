@@ -26,6 +26,21 @@ void debug_draw_player(t_raycast *ptr, t_vec2 **t){
 	dda(ptr,(t_cord){0,0}, t[0]->cord, 0x00FF00);
 }
 
+void debug_draw_map(t_raycast *p){
+	int i, j;
+	i = 0;
+	while(i < MAP_H){
+		j = 0;
+		while(j < MAP_W){
+			if(map[i][j] == 1){
+				fillrec(p, (t_cord){j * 100, i * 100}, (t_cord){j * 100 + 100, i * 100 + 100}, 0x00FF00);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	raycast(t_raycast *ptr){
 	t_vec2 pos, dir, plane;
 	t_ray ray;
@@ -35,7 +50,8 @@ void	raycast(t_raycast *ptr){
 	dir = ptr->camera.dir;
 	plane = ptr->camera.plane;
 	int x = 0;
-	ray.origin = pos;
+	ray.origin = pos;	
+	debug_draw_map(ptr);
 	// debug_draw_player(ptr, cords);
 	// dda(ptr,(t_cord){WIDTH/2, HEIGHT/2}, (t_cord){0, HEIGHT-1}, 0x0000ff);
 	while(x < WIDTH){
