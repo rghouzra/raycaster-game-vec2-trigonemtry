@@ -67,6 +67,7 @@
 		"vm_types.h": "c",
 		"kern_return.h": "c",
 		"boolean.h": "c",
-		"ioctl.h": "c"
+		"ioctl.h": "c",
+		"stdlib.h": "c"
 	}
 }
