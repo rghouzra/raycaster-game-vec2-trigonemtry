@@ -38,14 +38,27 @@ void debug_draw_map(t_raycast *p){
 					.y =i * HEIGHT / MAP_H
 					},
 					(t_cord){
-					.x =( j * WIDTH / MAP_W ) + 115,
-					.y =( i * HEIGHT / MAP_H)  + 80
+					.x =( j * WIDTH / MAP_W ) + 130,
+					.y =( i * HEIGHT / MAP_H)  + 100
 					} , 0x00FF00);
 			}
+			else
+				fillrec(p, (t_cord){
+					.x = (j * WIDTH / MAP_W),
+					.y =i * HEIGHT / MAP_H
+					},
+					(t_cord){
+					.x =( j * WIDTH / MAP_W ) + 130,
+					.y =( i * HEIGHT / MAP_H)  + 100
+					} , 0x0);
 			j++;
 		}
 		i++;
 	}
+}
+
+void draw_ray(t_raycast *ptr){
+	
 }
 
 void	raycast(t_raycast *ptr){
@@ -66,6 +79,7 @@ void	raycast(t_raycast *ptr){
 		ray.dir.cord.x = dir.cord.x + plane.cord.x * planx;
 		ray.dir.cord.y = dir.cord.y + plane.cord.y * planx;
 		debug_draw_ray(ptr, ray);
+		draw_ray(ptr);
 		x++;
 	}
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);

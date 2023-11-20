@@ -39,6 +39,16 @@ void init_camera(t_camera *camera){
 	camera->plane.cord = (t_cord){0, 0.66};
 }
 
+int mouse_press(int button, int x, int y, void *p){
+	t_raycast *ptr = (t_raycast *)p;
+	// printf("button: %d\n", button);
+	// printf("x: %d\n", x);
+	// printf("y: %d\n", y);
+	ptr->camera.dir =  rotate_vec(ptr->camera.dir, degree_to_rad(25));
+	ptr->camera.plane =  rotate_vec(ptr->camera.plane, degree_to_rad(25));
+	raycast(ptr);
+	return 0;
+}
 
 int main()
 {
@@ -55,6 +65,7 @@ int main()
 	init_camera(&holder->camera);
 	raycast(holder);
 	mlx_key_hook(holder->ptr_win, key_press, holder);
+	mlx_mouse_hook(holder->ptr_win, mouse_press, holder);
 	// mlx_hook(holder->ptr_win, 2, 1L<<0, key_press, holder);
 	mlx_loop(holder->ptr);
 	free(holder);
