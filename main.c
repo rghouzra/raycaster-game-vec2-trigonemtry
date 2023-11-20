@@ -66,7 +66,6 @@ int main()
 	raycast(holder);
 	mlx_key_hook(holder->ptr_win, key_press, holder);
 	mlx_mouse_hook(holder->ptr_win, mouse_press, holder);
-	// mlx_hook(holder->ptr_win, 2, 1L<<0, key_press, holder);
 	mlx_loop(holder->ptr);
 	free(holder);
 	return 0;
