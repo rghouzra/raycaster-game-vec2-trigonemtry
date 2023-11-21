@@ -48,6 +48,7 @@ void read_map(t_raycast *data);
 int key_press(int keycode, void *p);
 void clear_screen(t_raycast *ptr, unsigned int color);
 void fillrec(t_raycast *ptr, t_cord begin ,t_cord end, int color);
+void fillrecborders(t_raycast *ptr, t_cord begin ,t_cord end, int color);
 void raycast(t_raycast *ptr);
 void dda(t_raycast *ptr, t_cord begin, t_cord end, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
