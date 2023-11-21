@@ -2,7 +2,6 @@
 
 void dda(t_raycast *ptr, t_cord begin, t_cord end, int color){
 	double dx, dy;
-	double m;
 	double xinc, yinc;
 	int i, steps;
 
@@ -18,7 +17,6 @@ void dda(t_raycast *ptr, t_cord begin, t_cord end, int color){
 		yinc = dy / (double)fabs(dx);
 	}
 	i = 0;
-	static int j;
 	while(i <= steps){
 		my_mlx_pixel_put(&ptr->img, round(begin.x), round(begin.y), color);
 		// printf("%f\t%f\n", begin.x, begin.y);

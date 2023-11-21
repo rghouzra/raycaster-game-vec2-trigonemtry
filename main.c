@@ -36,10 +36,13 @@ void clear(t_raycast *h, int color)
 void init_camera(t_camera *camera){
 	camera->pos.cord = (t_cord){WIDTH / 2, HEIGHT / 2};
 	camera->dir.cord = (t_cord){-1, 0};
-	camera->plane.cord = (t_cord){0, 0.66};
+	camera->plane = rotate_vec(camera->dir,  degree_to_rad(90));
 }
 
 int mouse_press(int button, int x, int y, void *p){
+	(void)button;
+	(void)x;
+	(void)y;
 	t_raycast *ptr = (t_raycast *)p;
 	// printf("button: %d\n", button);
 	// printf("x: %d\n", x);
@@ -50,11 +53,16 @@ int mouse_press(int button, int x, int y, void *p){
 	return 0;
 }
 
+void checker(){
+	system("leaks raycaster");
+}
+
 int main()
 {
 	t_raycast *holder;
 
-	holder = malloc(sizeof(t_raycast));
+	// atexit(checker);
+	holder = calloc(sizeof(t_raycast), 1);
 	if(!holder)
 		return 1;
 	holder->ptr = mlx_init();
