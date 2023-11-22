@@ -2,7 +2,8 @@
 
 if [ "$1" == "clean" ]; then
 	echo cleaning...
-	rm -rf executable
+	rm -rf raycaster
+	rm -rf .vscode
 else
 	echo compiling...
 	export bool="false"
@@ -20,7 +21,7 @@ else
 			export FLAGS+=" -lmlx -DINC=0"
 		fi
 	fi
-	clang -fsanitize=address main.c raycast.c hooks.c ray_utils.c draw_utils.c vector_utils.c $inc $lib $FLAGS -o executable
+	clang -Wall -Wextra main.c raycast.c hooks.c ray_utils.c draw_utils.c vector_utils.c $inc $lib $FLAGS -o raycaster
 	unset FLAGS
 	unset inc
 	unset lib

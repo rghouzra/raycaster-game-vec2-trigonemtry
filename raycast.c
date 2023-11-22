@@ -23,7 +23,7 @@ void init(t_vec2 **p){
 
 
 void debug_draw_player(t_raycast *ptr, t_vec2 **t){
-	dda(ptr,(t_cord){0,0}, t[0]->cord, 0x00FF00);
+	dda(ptr,(t_cord){0,0}, t[0]->cord, 0x00FF10);
 }
 
 void debug_draw_map(t_raycast *p){
@@ -34,22 +34,22 @@ void debug_draw_map(t_raycast *p){
 		while(j < MAP_W){
 			if(map[i][j] == 1){
 				fillrec(p, (t_cord){
-					.x = (j * WIDTH / MAP_W),
-					.y =i * HEIGHT / MAP_H
+					.x = j*( WIDTH - 300)/ 10,
+					.y = i*(HEIGHT - 350)/ 10
 					},
 					(t_cord){
-					.x =( j * WIDTH / MAP_W ) + 130,
-					.y =( i * HEIGHT / MAP_H)  + 100
-					} , 0x00FF00);
+					.x = j*( WIDTH - 300)/ 10 +( WIDTH - 300)/10,
+					.y =   i*(HEIGHT - 350)/ 10 + (HEIGHT - 350) / 10
+					} , 0xFFFFFF);
 			}
 			else
 				fillrec(p, (t_cord){
-					.x = (j * WIDTH / MAP_W),
-					.y =i * HEIGHT / MAP_H
+					.x = j*( WIDTH - 300)/ 10,
+					.y = i*(HEIGHT - 350)/ 10
 					},
 					(t_cord){
-					.x =( j * WIDTH / MAP_W ) + 130,
-					.y =( i * HEIGHT / MAP_H)  + 100
+					.x = j*( WIDTH - 300)/ 10 +( WIDTH - 300)/10,
+					.y =   i*(HEIGHT - 350)/ 10 + (HEIGHT - 350) / 10
 					} , 0x0);
 			j++;
 		}
@@ -58,13 +58,12 @@ void debug_draw_map(t_raycast *p){
 }
 
 void draw_ray(t_raycast *ptr){
-	
+	(void)ptr;
 }
 
 void	raycast(t_raycast *ptr){
 	t_vec2 pos, dir, plane;
 	t_ray ray;
-	t_vec2 *cords[3] = {&pos, &dir, &plane};
 	double planx;
 	pos = ptr->camera.pos;
 	dir = ptr->camera.dir;
@@ -72,7 +71,7 @@ void	raycast(t_raycast *ptr){
 	int x = 0;
 	ray.origin = pos;	
 	debug_draw_map(ptr);
-	// debug_draw_player(ptr, cords);
+	debug_draw_player(ptr, (t_vec2 *[]){&pos, &dir, &plane});
 	// dda(ptr,(t_cord){WIDTH/2, HEIGHT/2}, (t_cord){0, HEIGHT-1}, 0x0000ff);
 	while(x < WIDTH){
 		planx = (double)2 * x/ (double)WIDTH - (double)1;
