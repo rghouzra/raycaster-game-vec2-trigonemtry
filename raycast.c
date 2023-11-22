@@ -7,7 +7,7 @@ void debug_draw_ray(t_raycast *ptr, t_ray ray){
 	if(i < 20)
 		return;
 	i= 0;
-	dda(ptr, ray.origin.cord, op_two_vectors(ray.origin, scaleVec(ray.dir, 300), ADD).cord, 0xff);
+	dda(ptr, ray.origin.cord, op_two_vectors(ray.origin, scaleVec(ray.dir, WIDTH + HEIGHT), ADD).cord, 0xff);
 }
 
 void debug_draw_camera(t_raycast *ptr, t_vec2 *tab){
