@@ -62,7 +62,7 @@ void draw_ray(t_raycast *ptr){
 }
 
 void ultimate_dda(t_raycast *ptr){
-
+	
 }
 
 void	raycast(t_raycast *ptr){
