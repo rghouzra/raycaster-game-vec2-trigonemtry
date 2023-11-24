@@ -4,7 +4,7 @@
 void debug_draw_ray(t_raycast *ptr, t_ray ray){
 	static int i;
 	i++;
-	if(i < 20)
+	if(i < 30)
 		return;
 	i= 0;
 	dda(ptr, ray.origin.cord, op_two_vectors(ray.origin, scaleVec(ray.dir, WIDTH + HEIGHT), ADD).cord, 0xff);
@@ -38,8 +38,8 @@ void debug_draw_map(t_raycast *p){
 					.y = i*(HEIGHT)/ MAP_H
 					},
 					(t_cord){
-					.x = j*(WIDTH)/ MAP_W +(WIDTH)/MAP_W,
-					.y =   i*(HEIGHT)/ MAP_H + (HEIGHT) / MAP_H
+					.x = (j*(WIDTH)/ MAP_W +((WIDTH)/MAP_W)) ,
+					.y =   i*(HEIGHT)/ MAP_H + ((HEIGHT) / MAP_H)
 					} , 0xFFFFFF);
 			}
 			else
@@ -48,8 +48,8 @@ void debug_draw_map(t_raycast *p){
 					.y = i*(HEIGHT)/ MAP_H
 					},
 					(t_cord){
-					.x = j*( WIDTH)/ MAP_W +( WIDTH)/MAP_W,
-					.y =   i*(HEIGHT)/ MAP_H + (HEIGHT) / MAP_H
+					.x = (j*( WIDTH)/ MAP_W +(( WIDTH)/MAP_W)) ,
+					.y =   i*(HEIGHT)/ MAP_H + ((HEIGHT) / MAP_H)
 					} , 0x0);
 			j++;
 		}
@@ -77,8 +77,8 @@ void	raycast(t_raycast *ptr){
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
 		cam->ray.dir.cord.x = cam->dir.cord.x + cam->plane.cord.x * ptr->camera.planx;
 		cam->ray.dir.cord.y = cam->dir.cord.y + cam->plane.cord.y * ptr->camera.planx;
-		// debug_draw_ray(ptr, cam->ray);
-		ultimate_dda(ptr);
+		debug_draw_ray(ptr, cam->ray);
+		// ultimate_dda(ptr);
 		x++;
 	}
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);

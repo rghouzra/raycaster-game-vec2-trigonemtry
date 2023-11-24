@@ -20,7 +20,7 @@
 # define WIDTH 800
 # define HEIGHT 800
 # define MAP_H 10
-# define MAP_W 7
+# define MAP_W 10
 # define degree_to_rad(x)((x) * M_PI / 180.0)
 typedef struct	s_data {
 	void	*img;

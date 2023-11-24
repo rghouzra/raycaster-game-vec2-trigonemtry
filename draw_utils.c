@@ -1,5 +1,7 @@
 #include "raycastfs.h"
 
+
+
 void dda(t_raycast *ptr, t_cord begin, t_cord end, int color){
 	double dx, dy;
 	double xinc, yinc;
