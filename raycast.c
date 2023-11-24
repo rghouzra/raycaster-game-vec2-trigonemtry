@@ -34,22 +34,22 @@ void debug_draw_map(t_raycast *p){
 		while(j < MAP_W){
 			if(map[i][j] == 1){
 				fillrec(p, (t_cord){
-					.x = j*( WIDTH - 300)/ 10,
-					.y = i*(HEIGHT - 350)/ 10
+					.x = j*(WIDTH)/ MAP_W,
+					.y = i*(HEIGHT)/ MAP_H
 					},
 					(t_cord){
-					.x = j*( WIDTH - 300)/ 10 +( WIDTH - 300)/10,
-					.y =   i*(HEIGHT - 350)/ 10 + (HEIGHT - 350) / 10
+					.x = j*(WIDTH)/ MAP_W +(WIDTH)/MAP_W,
+					.y =   i*(HEIGHT)/ MAP_H + (HEIGHT) / MAP_H
 					} , 0xFFFFFF);
 			}
 			else
 				fillrec(p, (t_cord){
-					.x = j*( WIDTH - 300)/ 10,
-					.y = i*(HEIGHT - 350)/ 10
+					.x = j*( WIDTH)/ MAP_W,
+					.y = i*(HEIGHT)/ MAP_H
 					},
 					(t_cord){
-					.x = j*( WIDTH - 300)/ 10 +( WIDTH - 300)/10,
-					.y =   i*(HEIGHT - 350)/ 10 + (HEIGHT - 350) / 10
+					.x = j*( WIDTH)/ MAP_W +( WIDTH)/MAP_W,
+					.y =   i*(HEIGHT)/ MAP_H + (HEIGHT) / MAP_H
 					} , 0x0);
 			j++;
 		}
