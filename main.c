@@ -44,11 +44,9 @@ int mouse_press(int button, int x, int y, void *p){
 	(void)x;
 	(void)y;
 	t_raycast *ptr = (t_raycast *)p;
-	// printf("button: %d\n", button);
-	// printf("x: %d\n", x);
-	// printf("y: %d\n", y);
 	ptr->camera.dir =  rotate_vec(ptr->camera.dir, degree_to_rad(25));
 	ptr->camera.plane =  rotate_vec(ptr->camera.plane, degree_to_rad(25));
+	clear_screen(ptr, 0x0);
 	raycast(ptr);
 	return 0;
 }

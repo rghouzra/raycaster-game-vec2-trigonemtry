@@ -61,26 +61,25 @@ void draw_ray(t_raycast *ptr){
 	(void)ptr;
 }
 
+void ultimate_dda(t_raycast *ptr){
+
+}
+
 void	raycast(t_raycast *ptr){
-	t_vec2 pos, dir, plane;
-	t_ray ray;
-	double planx;
-	pos = ptr->camera.pos;
-	dir = ptr->camera.dir;
-	plane = ptr->camera.plane;
 	int x = 0;
-	ray.origin = pos;	
+	t_camera *cam;
+
+	cam = &ptr->camera;
+	cam->ray.origin = cam->pos;
 	debug_draw_map(ptr);
-	debug_draw_player(ptr, (t_vec2 *[]){&pos, &dir, &plane});
-	// dda(ptr,(t_cord){WIDTH/2, HEIGHT/2}, (t_cord){0, HEIGHT-1}, 0x0000ff);
+	debug_draw_player(ptr, (t_vec2 *[]){&cam->pos, &cam->dir, &cam->plane});
 	while(x < WIDTH){
-		planx = (double)2 * x/ (double)WIDTH - (double)1;
-		ray.dir.cord.x = dir.cord.x + plane.cord.x * planx;
-		ray.dir.cord.y = dir.cord.y + plane.cord.y * planx;
-		debug_draw_ray(ptr, ray);
-		draw_ray(ptr);
+		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
+		cam->ray.dir.cord.x = cam->dir.cord.x + cam->plane.cord.x * ptr->camera.planx;
+		cam->ray.dir.cord.y = cam->dir.cord.y + cam->plane.cord.y * ptr->camera.planx;
+		// debug_draw_ray(ptr, cam->ray);
+		ultimate_dda(ptr);
 		x++;
 	}
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
-	// debug_draw_camera(ptr, cords);
 }

@@ -39,7 +39,7 @@ int key_press(int keycode, void *p){
 		if(ptr->camera.pos.cord.x < HEIGHT - 20)
 		ptr->camera.pos.cord.y += 20;
 	}
-	// clear_screen(ptr, 0x000000);
+	clear_screen(ptr, 0x000000);
 	raycast(ptr);
 	return 0;
 }

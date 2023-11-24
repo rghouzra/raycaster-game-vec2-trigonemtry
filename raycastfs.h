@@ -13,9 +13,10 @@
 #endif
 # include <stdlib.h>
 # include <math.h>
-# include <libc.h>
+# include <stdbool.h>
 # include "ray.h"
 # include <stdio.h>
+# define abs(N)((N > 0) ? (N) : (-N))
 # define WIDTH 800
 # define HEIGHT 800
 # define MAP_H 10
@@ -32,7 +33,9 @@ typedef struct	s_data {
 typedef struct s_camera{
 	t_vec2 pos;
 	t_vec2 dir;
+	t_ray ray;
 	t_vec2 plane;
+	double planx;
 }t_camera;
 
 typedef struct	s_raycast {
