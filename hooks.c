@@ -4,7 +4,6 @@ int key_press(int keycode, void *p){
 	t_raycast *ptr = (t_raycast *)p;
 	if(keycode == 53)
 		exit(0);
-	printf("%d\n", keycode);
 	if(keycode == 13){
 		if(ptr->camera.pos.cord.y > 11){
 

@@ -37,6 +37,10 @@ void init_camera(t_camera *camera){
 	camera->pos.cord = (t_cord){WIDTH / 2, HEIGHT / 2};
 	camera->dir.cord = (t_cord){-1, 0};
 	camera->plane = rotate_vec(camera->dir,  degree_to_rad(90));
+	if(camera->plane.cord.x >0.0001 || camera->plane.cord.x < -0.00011)
+		camera->plane.cord.x -=  ((camera->plane.cord.x >= 0) * 0.34 ) + ((camera->plane.cord.x < 0) * -0.34);
+	if(camera->plane.cord.y>0.0001 || camera->plane.cord.y< -0.0001)
+		camera->plane.cord.y -=  ((camera->plane.cord.y >= 0) * 0.34 ) + ((camera->plane.cord.y < 0) * -0.34);
 }
 
 int mouse_press(int button, int x, int y, void *p){
@@ -44,8 +48,7 @@ int mouse_press(int button, int x, int y, void *p){
 	(void)x;
 	(void)y;
 	t_raycast *ptr = (t_raycast *)p;
-	ptr->camera.dir =  rotate_vec(ptr->camera.dir, degree_to_rad(25));
-	ptr->camera.plane =  rotate_vec(ptr->camera.plane, degree_to_rad(25));
+	ptr->camera.pos.cord = (t_cord){x, y};
 	clear_screen(ptr, 0x0);
 	raycast(ptr);
 	return 0;

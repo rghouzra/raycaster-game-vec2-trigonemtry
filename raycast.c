@@ -10,11 +10,6 @@ void debug_draw_ray(t_raycast *ptr, t_ray ray){
 	dda(ptr, ray.origin.cord, op_two_vectors(ray.origin, scaleVec(ray.dir, WIDTH + HEIGHT), ADD).cord, 0xff);
 }
 
-void debug_draw_camera(t_raycast *ptr, t_vec2 *tab){
-	
-}
-
-
 void init(t_vec2 **p){
 	p[0]->cord = (t_cord){WIDTH / 2, HEIGHT / 2};
 	p[1]->cord = (t_cord){-1, 0};
@@ -62,7 +57,9 @@ void draw_ray(t_raycast *ptr){
 }
 
 void ultimate_dda(t_raycast *ptr){
-	
+	t_cord deltadist;
+	t_cord step;
+	if(ptr->camera.ray.dir.cord.x > 0){;}
 }
 
 void	raycast(t_raycast *ptr){
@@ -77,8 +74,8 @@ void	raycast(t_raycast *ptr){
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
 		cam->ray.dir.cord.x = cam->dir.cord.x + cam->plane.cord.x * ptr->camera.planx;
 		cam->ray.dir.cord.y = cam->dir.cord.y + cam->plane.cord.y * ptr->camera.planx;
-		debug_draw_ray(ptr, cam->ray);
-		// ultimate_dda(ptr);
+		// debug_draw_ray(ptr, cam->ray);
+		ultimate_dda(ptr);
 		x++;
 	}
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
