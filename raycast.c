@@ -56,10 +56,36 @@ void draw_ray(t_raycast *ptr){
 	(void)ptr;
 }
 
+
 void ultimate_dda(t_raycast *ptr){
 	t_cord deltadist;
-	t_cord step;
-	if(ptr->camera.ray.dir.cord.x > 0){;}
+	t_cord sidedist;
+	int stepx, stepy;
+	int mapx, mapy;
+	t_camera camera;
+
+	camera = ptr->camera;
+	mapx = (int)camera.pos.cord.x;
+	mapx = (int)camera.pos.cord.y;
+	deltadist.x = 1 / ((camera.dir.cord.x == 0) * 1e30 + camera.dir.cord.x);
+	deltadist.y = 1 / ((camera.dir.cord.y == 0) * 1e30 + camera.dir.cord.y);
+	if(camera.ray.dir.cord.x >=0 ){
+		stepx = 1;
+
+	}	
+	else{
+
+		stepx = -1;
+	}
+	if(camera.ray.dir.cord.y >=0 ){
+
+		stepy = 1;
+	}
+	else{
+
+		stepy = -1;
+	}
+
 }
 
 void	raycast(t_raycast *ptr){
