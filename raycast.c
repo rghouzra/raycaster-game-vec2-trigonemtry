@@ -71,7 +71,7 @@ void ultimate_dda(t_raycast *ptr){
 	deltadist.y = 1 / ((camera.dir.cord.y == 0) * 1e30 + camera.dir.cord.y);
 	if(camera.ray.dir.cord.x >=0 ){
 		stepx = 1;
-
+		
 	}	
 	else{
 
