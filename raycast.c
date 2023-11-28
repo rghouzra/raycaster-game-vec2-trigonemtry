@@ -58,32 +58,40 @@ void draw_ray(t_raycast *ptr){
 
 
 void ultimate_dda(t_raycast *ptr){
-	t_cord deltadist;
-	t_cord sidedist;
-	int stepx, stepy;
-	int mapx, mapy;
-	t_camera camera;
-
-	camera = ptr->camera;
-	mapx = (int)camera.pos.cord.x;
-	mapx = (int)camera.pos.cord.y;
-	deltadist.x = 1 / ((camera.dir.cord.x == 0) * 1e30 + camera.dir.cord.x);
-	deltadist.y = 1 / ((camera.dir.cord.y == 0) * 1e30 + camera.dir.cord.y);
-	if(camera.ray.dir.cord.x >=0 ){
-		stepx = 1;
-		
+	ptr->dda.hit = 0;
+	ptr->dda.camera = ptr->camera;
+	ptr->dda.mapx = (int)ptr->dda.camera.pos.cord.x;
+	ptr->dda.mapy = (int)ptr->dda.camera.pos.cord.y;
+	ptr->dda.deltadist.x = 1 / ((ptr->dda.camera.dir.cord.x == 0) * 1e30 + ptr->dda.camera.dir.cord.x);
+	ptr->dda.deltadist.y = 1 / ((ptr->dda.camera.dir.cord.y == 0) * 1e30 + ptr->dda.camera.dir.cord.y);
+	if(ptr->dda.camera.ray.dir.cord.x >=0 ){
+		ptr->dda.stepx = 1;
+		ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->dda.mapx + 1 - ptr->dda.camera.pos.cord.x);
 	}	
 	else{
-
-		stepx = -1;
+		ptr->dda.stepx = -1;
+		ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->dda.camera.pos.cord.x - ptr->dda.mapx);
 	}
-	if(camera.ray.dir.cord.y >=0 ){
-
-		stepy = 1;
+	if(ptr->dda.camera.ray.dir.cord.y >= 0){
+		ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->dda.mapy + 1 - ptr->dda.camera.pos.cord.y);
+		ptr->dda.stepy = 1;
 	}
 	else{
-
-		stepy = -1;
+		ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->dda.camera.pos.cord.y - ptr->dda.mapy);
+		ptr->dda.stepy = -1;
+	}
+	while(!ptr->dda.hit){
+		if(ptr->dda.sidedist.x > ptr->dda.sidedist.y){
+			ptr->dda.sidedist.y += ptr->dda.deltadist.y;
+			ptr->dda.mapy += ptr->dda.stepy;
+			ptr->dda.side = NS;
+		}
+		else{
+			ptr->dda.sidedist.x += ptr->dda.deltadist.x;
+			ptr->dda.mapx += ptr->dda.stepx;
+			ptr->dda.side = EW;
+		}
+		ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
 	}
 
 }

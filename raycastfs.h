@@ -12,6 +12,7 @@
 	#include "mlx.h"
 #endif
 # include <stdlib.h>
+# include <libc.h>
 # include <math.h>
 # include <stdbool.h>
 # include "ray.h"
@@ -22,6 +23,8 @@
 # define MAP_H 10
 # define MAP_W 10
 # define degree_to_rad(x)((x) * M_PI / 180.0)
+# define NS 1
+# define EW 0
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -38,10 +41,21 @@ typedef struct s_camera{
 	double planx;
 }t_camera;
 
+typedef struct s_dda{
+	t_cord deltadist;
+	t_cord sidedist;
+	int stepx, stepy;
+	int mapx, mapy;
+	int hit;
+	t_camera camera;
+	int side;
+}t_dda;
+
 typedef struct	s_raycast {
 	void *ptr;
 	void *ptr_win;
 	t_camera camera;
+	t_dda dda;
 	t_data img;
 }t_raycast;
 

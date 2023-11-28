@@ -34,7 +34,7 @@ void clear(t_raycast *h, int color)
 }
 
 void init_camera(t_camera *camera){
-	camera->pos.cord = (t_cord){WIDTH / 2, HEIGHT / 2};
+	camera->pos.cord = (t_cord){MAP_W / 2, MAP_H / 2};
 	camera->dir.cord = (t_cord){-1, 0};
 	camera->plane = rotate_vec(camera->dir,  degree_to_rad(90));
 	if(camera->plane.cord.x >0.0001 || camera->plane.cord.x < -0.00011)
