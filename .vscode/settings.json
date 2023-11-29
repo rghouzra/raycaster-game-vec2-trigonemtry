@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"*.cpp": "cpp",
+		"raycastfs.h": "c"
+	}
+}
