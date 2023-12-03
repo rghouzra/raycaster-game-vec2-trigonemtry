@@ -1,1 +1,2 @@
-finish the dda
+-finish the dda
+-update the drawing functions
