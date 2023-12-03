@@ -21,7 +21,8 @@
 # define WIDTH 800
 # define HEIGHT 800
 # define MAP_H 10
-# define MAP_W 10
+#define GSIZE (WIDTH + HEIGHT)/20
+# define MAP_W 7
 # define degree_to_rad(x)((x) * M_PI / 180.0)
 # define NS 1
 # define EW 0
@@ -44,6 +45,7 @@ typedef struct s_camera{
 typedef struct s_dda{
 	t_cord deltadist;
 	t_cord sidedist;
+	double perpwalldist;
 	int stepx, stepy;
 	int mapx, mapy;
 	int hit;

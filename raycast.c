@@ -17,8 +17,9 @@ void init(t_vec2 **p){
 }
 
 
-void debug_draw_player(t_raycast *ptr, t_vec2 **t){
-	dda(ptr,(t_cord){0,0}, t[0]->cord, 0x00FF10);
+void debug_draw_player(t_raycast *ptr){
+	// dda(ptr,(t_cord){0,0}, t[0]->cord, 0x00FF10);
+	fillrecborders(ptr, ptr->camera.pos.cord, (t_cord){ptr->camera.pos.cord.x + 10,ptr->camera.pos.cord.y + 10}, 0xFF0000);
 }
 
 void debug_draw_map(t_raycast *p){
@@ -29,23 +30,23 @@ void debug_draw_map(t_raycast *p){
 		while(j < MAP_W){
 			if(map[i][j] == 1){
 				fillrec(p, (t_cord){
-					.x = j*(WIDTH)/ MAP_W,
-					.y = i*(HEIGHT)/ MAP_H
+					.x = j*GSIZE,
+					.y = i*GSIZE
 					},
 					(t_cord){
-					.x = (j*(WIDTH)/ MAP_W +((WIDTH)/MAP_W)) ,
-					.y =   i*(HEIGHT)/ MAP_H + ((HEIGHT) / MAP_H)
+					.x = (j*GSIZE) + GSIZE,
+					.y =   (i*GSIZE) + GSIZE
 					} , 0xFFFFFF);
 			}
-			else
-				fillrec(p, (t_cord){
-					.x = j*( WIDTH)/ MAP_W,
-					.y = i*(HEIGHT)/ MAP_H
-					},
-					(t_cord){
-					.x = (j*( WIDTH)/ MAP_W +(( WIDTH)/MAP_W)) ,
-					.y =   i*(HEIGHT)/ MAP_H + ((HEIGHT) / MAP_H)
-					} , 0x0);
+			// else
+			// 	fillrec(p, (t_cord){
+			// 		.x = j*( WIDTH)/ MAP_W,
+			// 		.y = i*(HEIGHT)/ MAP_H
+			// 		},
+			// 		(t_cord){
+			// 		.x = (j*( WIDTH)/ MAP_W +(( WIDTH)/MAP_W)) ,
+			// 		.y =   i*(HEIGHT)/ MAP_H + ((HEIGHT) / MAP_H)
+			// 		} , 0x0);
 			j++;
 		}
 		i++;
@@ -91,8 +92,12 @@ void ultimate_dda(t_raycast *ptr){
 			ptr->dda.mapx += ptr->dda.stepx;
 			ptr->dda.side = EW;
 		}
-		ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
+		// fprintf(stderr,"%d\t%d\n", ptr->dda.mapx,ptr->dda.mapy);
+		// ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
 	}
+	// if(ptr->dda.side == EW){
+	// 	// ptr->dda
+	// }
 
 }
 
@@ -103,14 +108,14 @@ void	raycast(t_raycast *ptr){
 	cam = &ptr->camera;
 	cam->ray.origin = cam->pos;
 	debug_draw_map(ptr);
-	debug_draw_player(ptr, (t_vec2 *[]){&cam->pos, &cam->dir, &cam->plane});
+	debug_draw_player(ptr);
 	while(x < WIDTH){
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
 		cam->ray.dir.cord.x = cam->dir.cord.x + cam->plane.cord.x * ptr->camera.planx;
 		cam->ray.dir.cord.y = cam->dir.cord.y + cam->plane.cord.y * ptr->camera.planx;
-		// debug_draw_ray(ptr, cam->ray);
-		ultimate_dda(ptr);
-		x++;
+		// ultimate_dda(ptr);
+	  debug_draw_ray(ptr,cam->ray);
+    x++;
 	}
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
 }
