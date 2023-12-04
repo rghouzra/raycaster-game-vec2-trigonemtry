@@ -34,7 +34,7 @@ void clear(t_raycast *h, int color)
 }
 
 void init_camera(t_camera *camera){
-	camera->pos.cord = (t_cord){MAP_W -1, MAP_H -1};
+	camera->pos.cord = (t_cord){0,0};
 	camera->dir.cord = (t_cord){1, 1};
 	camera->plane = rotate_vec(camera->dir,  degree_to_rad(90));
 	if(camera->plane.cord.x >0.0001 || camera->plane.cord.x < -0.00011)
@@ -57,11 +57,17 @@ int mouse_press(int button, int x, int y, void *p){
 void checker(){
 	system("leaks raycaster");
 }
-
+FILE *stream_debug;
 int main()
 {
 	t_raycast *holder;
 
+	stream_debug = fopen("debug.txt", "w");
+	if(!stream_debug)
+	{
+		perror("fopen: ");
+		exit(1);
+	}
 	// atexit(checker);
 	holder = calloc(sizeof(t_raycast) + 1, 1);
 	if(!holder)
