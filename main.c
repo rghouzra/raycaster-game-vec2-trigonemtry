@@ -83,5 +83,6 @@ int main()
 	mlx_mouse_hook(holder->ptr_win, mouse_press, holder);
 	mlx_loop(holder->ptr);
 	free(holder);
+	fclose(stream_debug);
 	return 0;
 }
