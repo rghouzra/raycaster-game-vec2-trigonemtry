@@ -18,8 +18,8 @@ void init(t_vec2 **p){
 
 
 void debug_draw_player(t_raycast *ptr){
-	// dda(ptr,(t_cord){0,0}, t[0]->cord, 0x00FF10);
-	fillrecborders(ptr, ptr->camera.pos.cord, (t_cord){ptr->camera.pos.cord.x + 10,ptr->camera.pos.cord.y + 10}, 0xFF0000);
+	fillrecborders(ptr, (t_cord){ptr->camera.pos.cord.x - 5, ptr->camera.pos.cord.y - 5}, \
+		(t_cord){ptr->camera.pos.cord.x + 5,ptr->camera.pos.cord.y + 5}, 0xFF0000);
 }
 
 void debug_draw_map(t_raycast *p){
@@ -28,16 +28,15 @@ void debug_draw_map(t_raycast *p){
 	while(i < MAP_H){
 		j = 0;
 		while(j < MAP_W){
-			if(map[i][j] == 1){
+			// map[i][j] == 1
 				fillrec(p, (t_cord){
-					.x = j*GSIZE,
-					.y = i*GSIZE
+					.x = j * GSIZE,
+					.y = i * GSIZE
 					},
 					(t_cord){
-					.x = (j*GSIZE) + GSIZE,
-					.y =   (i*GSIZE) + GSIZE
-					} , 0xFFFFFF);
-			}
+					.x = (j * GSIZE) + GSIZE,
+					.y =   (i * GSIZE) + GSIZE
+					} , ((0xFFFFFF) * (map[i][j] == 1)));
 			// else
 			// 	fillrec(p, (t_cord){
 			// 		.x = j*( WIDTH)/ MAP_W,
@@ -57,7 +56,7 @@ void draw_ray(t_raycast *ptr){
 	(void)ptr;
 }
 
-
+#include <stdarg.h>
 void ultimate_dda(t_raycast *ptr){
 	ptr->dda.hit = 0;
 	ptr->dda.camera = ptr->camera;
@@ -92,14 +91,26 @@ void ultimate_dda(t_raycast *ptr){
 			ptr->dda.mapx += ptr->dda.stepx;
 			ptr->dda.side = EW;
 		}
-		// fprintf(stderr,"%d\t%d\n", ptr->dda.mapx,ptr->dda.mapy);
-		// ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
+		ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
 	}
-	// if(ptr->dda.side == EW){
-	// 	// ptr->dda
-	// }
-
+	ptr->dda.perpwalldist = ((ptr->dda.sidedist.x - ptr->dda.deltadist.x) * (ptr->dda.side == EW)) + \
+		((ptr->dda.sidedist.y - ptr->dda.deltadist.y) * (ptr->dda.side == NS));
 }
+
+
+// void debug_draw_grid(t_raycast *ptr){
+// 	int gw , gh;
+// 	gw = gh = 0;
+// 	for (size_t i = 0; i < HEIGHT; i++){
+// 		for (size_t j = 0; j < WIDTH; j++){
+// 			if(gw == 50)
+// 				dda(ptr, (t_cord){i, j},)
+// 			gw++;
+// 			gh++;
+// 		}
+// 	}
+	
+// }
 
 void	raycast(t_raycast *ptr){
 	int x = 0;
@@ -107,6 +118,7 @@ void	raycast(t_raycast *ptr){
 
 	cam = &ptr->camera;
 	cam->ray.origin = cam->pos;
+	// debug_draw_grid(ptr);
 	debug_draw_map(ptr);
 	debug_draw_player(ptr);
 	while(x < WIDTH){
