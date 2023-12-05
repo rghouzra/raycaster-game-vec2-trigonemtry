@@ -63,24 +63,20 @@ void ultimate_dda(t_raycast *ptr){
 	ptr->dda.mapy = (int)ptr->dda.camera.pos.cord.y;
 	ptr->dda.deltadist.x = 1 / ((ptr->dda.camera.dir.cord.x == 0) * 1e30 + ptr->dda.camera.dir.cord.x);
 	ptr->dda.deltadist.y = 1 / ((ptr->dda.camera.dir.cord.y == 0) * 1e30 + ptr->dda.camera.dir.cord.y);
-	if(ptr->dda.camera.ray.dir.cord.x >=0 ){
+	ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->dda.camera.pos.cord.x - ptr->dda.mapx);
+	ptr->dda.stepx = -1;
+	ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->dda.camera.pos.cord.y - ptr->dda.mapy);
+	ptr->dda.stepy = -1;
+	if(ptr->dda.camera.ray.dir.cord.x >= 0){
 		ptr->dda.stepx = 1;
 		ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->dda.mapx + 1 - ptr->dda.camera.pos.cord.x);
 	}	
-	else{
-		ptr->dda.stepx = -1;
-		ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->dda.camera.pos.cord.x - ptr->dda.mapx);
-	}
 	if(ptr->dda.camera.ray.dir.cord.y >= 0){
 		ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->dda.mapy + 1 - ptr->dda.camera.pos.cord.y);
 		ptr->dda.stepy = 1;
 	}
-	else{
-		ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->dda.camera.pos.cord.y - ptr->dda.mapy);
-		ptr->dda.stepy = -1;
-	}
 	int count = -1;
-	while(!ptr->dda.hit && ++count < 100){
+	while(!ptr->dda.hit){
 		if(ptr->dda.sidedist.x > ptr->dda.sidedist.y){
 			ptr->dda.sidedist.y += ptr->dda.deltadist.y;
 			ptr->dda.mapy += ptr->dda.stepy;
@@ -91,12 +87,10 @@ void ultimate_dda(t_raycast *ptr){
 			ptr->dda.mapx += ptr->dda.stepx;
 			ptr->dda.side = EW;
 		}
-		fprintf(stream_debug,"%d\t%d\n",ptr->dda.mapx,ptr->dda.mapy);
 		ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
 	}
-	// fflush(stream_debug);
 	ptr->dda.perpwalldist = ((ptr->dda.sidedist.x - ptr->dda.deltadist.x) * (ptr->dda.side == EW)) + \
-		((ptr->dda.sidedist.y - ptr->dda.deltadist.y) * (ptr->dda.side == NS));
+	((ptr->dda.sidedist.y - ptr->dda.deltadist.y) * (ptr->dda.side == NS));
 }
 
 
