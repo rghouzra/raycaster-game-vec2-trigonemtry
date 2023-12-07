@@ -75,7 +75,6 @@ void ultimate_dda(t_raycast *ptr){
 		ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->dda.mapy + 1 - ptr->dda.camera.pos.cord.y);
 		ptr->dda.stepy = 1;
 	}
-	int count = -1;
 	while(!ptr->dda.hit){
 		if(ptr->dda.sidedist.x > ptr->dda.sidedist.y){
 			ptr->dda.sidedist.y += ptr->dda.deltadist.y;
@@ -93,23 +92,15 @@ void ultimate_dda(t_raycast *ptr){
 	((ptr->dda.sidedist.y - ptr->dda.deltadist.y) * (ptr->dda.side == NS));
 }
 
-
-// void debug_draw_grid(t_raycast *ptr){
-// 	int gw , gh;
-// 	gw = gh = 0;
-// 	for (size_t i = 0; i < HEIGHT; i++){
-// 		for (size_t j = 0; j < WIDTH; j++){
-// 			if(gw == 50)
-// 				draw_line(ptr, (t_cord){i, j},)
-// 			gw++;
-// 			gh++;
-// 		}
-// 	}
-	
-// }
-
-void draw_wall(t_raycast *ptr){
-
+void draw_wall(t_raycast *ptr, int x){
+	int  y = 0;
+	for(y= 0; y < HEIGHT;y++)
+	{
+		if(y < HEIGHT / 2 - ptr->dda.perpwalldist || y > HEIGHT / 2 + ptr->dda.perpwalldist)
+			my_mlx_pixel_put(&ptr->img, x, y, 0xff04f);
+		else
+			my_mlx_pixel_put(&ptr->img, x, y, 0xfffffa);
+	}
 }
 
 void	raycast(t_raycast *ptr){
@@ -119,14 +110,14 @@ void	raycast(t_raycast *ptr){
 	cam = &ptr->camera;
 	cam->ray.origin = cam->pos;
 	// debug_draw_grid(ptr);
-	debug_draw_map(ptr);
+	// debug_draw_map(ptr);
 	debug_draw_player(ptr);
-	while(x < MAP_W){
+	while(x < WIDTH){
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
 		cam->ray.dir.cord.x = cam->dir.cord.x + cam->plane.cord.x * ptr->camera.planx;
 		cam->ray.dir.cord.y = cam->dir.cord.y + cam->plane.cord.y * ptr->camera.planx;
 		ultimate_dda(ptr);
-		// draw_wall(ptr);
+		draw_wall(ptr, x);
 		// debug_draw_ray(ptr,cam->ray);
 		x++;
 	}

@@ -3,13 +3,13 @@
 int map[MAP_H][MAP_W] = {
 	{1,1,1,1,1,1,1},
 	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
 	{1,0,0,0,0,1,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,1,1},
+	{1,0,0,0,0,1,1},
+	{1,0,0,0,0,1,1},
+	{1,0,0,0,0,1,1},
+	{1,0,0,0,0,1,1},
+	{1,0,0,0,0,1,1},
 	{1,1,1,1,1,1,1},
 };
 
@@ -35,7 +35,7 @@ void clear(t_raycast *h, int color)
 
 void init_camera(t_camera *camera){
 	camera->pos.cord = (t_cord){4,5};
-	camera->dir.cord = (t_cord){-1, 0};
+	camera->dir.cord = (t_cord){1, 0};
 	camera->plane = rotate_vec(camera->dir,  degree_to_rad(90));
 	if(camera->plane.cord.x >0.0001 || camera->plane.cord.x < -0.00011)
 		camera->plane.cord.x -=  ((camera->plane.cord.x >= 0) * 0.34 ) + ((camera->plane.cord.x < 0) * -0.34);
