@@ -21,7 +21,7 @@
 # define WIDTH 800
 # define HEIGHT 800
 # define MAP_H 10
-#define GSIZE (WIDTH + HEIGHT)/20
+#define GSIZE 50
 # define MAP_W 7
 # define degree_to_rad(x)((x) * M_PI / 180.0)
 # define NS 1
@@ -60,6 +60,7 @@ typedef struct	s_raycast {
 	t_dda dda;
 	t_data img;
 }t_raycast;
+
 
 
 extern int map[MAP_H][MAP_W];
