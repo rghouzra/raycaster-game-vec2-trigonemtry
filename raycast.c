@@ -2,7 +2,7 @@
 
 
 void debug_draw_rays(t_raycast *ptr, t_ray ray){
-	draw_line(ptr, ray.origin.cord, op_two_vectors(ray.origin, scaleVec(ray.dir, WIDTH + HEIGHT), ADD).cord, 0xff);
+	draw_line(ptr, ray.origin.cord, op_two_vectors(ray.origin, scaleVec(ray.dir,GSIZE), ADD).cord, 0xff);
 }
 
 void init(t_vec2 **p){
@@ -13,7 +13,7 @@ void init(t_vec2 **p){
 
 
 void debug_draw_player(t_raycast *ptr){
-	fillrecborders(ptr, (t_cord){ptr->camera.pos.cord.x - 5, ptr->camera.pos.cord.y - 5}, \
+	fillrecborders(ptr, (t_cord){ptr->camera.pos.cord.x , ptr->camera.pos.cord.y }, \
 		(t_cord){ptr->camera.pos.cord.x + 5,ptr->camera.pos.cord.y + 5}, 0xFF0000);
 }
 
@@ -104,8 +104,8 @@ void	raycast(t_raycast *ptr){
 	cam = &ptr->camera;
 	cam->ray.origin = cam->pos;
 	// debug_draw_grid(ptr);
-	// debug_draw_map(ptr);
-	// debug_draw_player(ptr);
+	debug_draw_map(ptr);
+	debug_draw_player(ptr);
 	while(x < WIDTH){
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
 		cam->ray.dir.cord.x = cam->dir.cord.x + cam->plane.cord.x * ptr->camera.planx;
@@ -114,7 +114,7 @@ void	raycast(t_raycast *ptr){
 		// dda(ptr);
 		ultimate_dda(ptr);
 		draw_wall(ptr, x);
-		// debug_draw_rays(ptr,cam->ray);
+		debug_draw_rays(ptr,cam->ray);
 		x++;
 	}
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
