@@ -21,7 +21,6 @@ void draw_line(t_raycast *ptr, t_cord begin, t_cord end, int color){
 	i = 0;
 	while(i <= steps){
 		my_mlx_pixel_put(&ptr->img, round(begin.x), round(begin.y), color);
-		// printf("%f\t%f\n", begin.x, begin.y);
 		begin.x +=xinc;
 		begin.y +=yinc;
 		i++;
@@ -34,7 +33,7 @@ void fillrec(t_raycast *ptr, t_cord begin ,t_cord end, int color){
 		{
 			if((i >= begin.y && i <=begin.y) || (i >= end.y && i < begin.y ) ||\
 			(j >= begin.x && j <= begin.x) || (j >= end.x  && j < begin.x) )
-			my_mlx_pixel_put(&ptr->img, j, i, 0xff0000);
+				my_mlx_pixel_put(&ptr->img, j, i, 0xff0000);
 			else
 				my_mlx_pixel_put(&ptr->img, j, i, color);
 		}

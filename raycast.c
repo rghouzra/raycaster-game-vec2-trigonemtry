@@ -2,7 +2,9 @@
 
 
 void debug_draw_rays(t_raycast *ptr, t_ray ray){
-	draw_line(ptr, ray.origin.cord, op_two_vectors(ray.origin, scaleVec(ray.dir,GSIZE), ADD).cord, 0xff);
+	draw_line(ptr, (t_cord){ray.origin.cord.x*GSIZE ,ray.origin.cord.y * GSIZE},\
+	 op_two_vectors((t_vec2){(t_cord){ray.origin.cord.x*GSIZE ,ray.origin.cord.y * GSIZE}},\
+	  scaleVec(ray.dir,GSIZE), ADD).cord, 0xff);
 }
 
 void init(t_vec2 **p){
@@ -23,13 +25,24 @@ void debug_draw_map(t_raycast *p){
 	while(i < MAP_H){
 		j = 0;
 		while(j < MAP_W){
-				fillrec(p, (t_cord){
-					.x = j * GSIZE,
-					.y = i * GSIZE
+				if(j == (int)p->camera.pos.cord.x && i == (int)p->camera.pos.cord.y)
+					fillrec(p, (t_cord){
+						j*GSIZE, i*GSIZE
 					},
 					(t_cord){
-					.x = (j * GSIZE) + GSIZE,
-					.y =   (i * GSIZE) + GSIZE
+						(j*GSIZE) + 50,
+						(i*GSIZE)+50
+					},
+						0xffff20
+					);
+				else
+					fillrec(p, (t_cord){
+						.x = j * GSIZE,
+						.y = i * GSIZE
+					},
+					(t_cord){
+						.x = (j * GSIZE) + GSIZE,
+						.y =   (i * GSIZE) + GSIZE
 					} , ((0xFFFFFF) * (map[i][j] == 1)));
 			j++;
 		}
@@ -103,9 +116,9 @@ void	raycast(t_raycast *ptr){
 
 	cam = &ptr->camera;
 	cam->ray.origin = cam->pos;
-	// debug_draw_grid(ptr);
+	fprintf(stream_debug, "%f\t%f\n", ptr->camera.pos.cord.x, ptr->camera.pos.cord.y);
+	fflush(stream_debug);
 	debug_draw_map(ptr);
-	debug_draw_player(ptr);
 	while(x < WIDTH){
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
 		cam->ray.dir.cord.x = cam->dir.cord.x + cam->plane.cord.x * ptr->camera.planx;
