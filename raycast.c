@@ -58,8 +58,8 @@ void init_dda(t_raycast *ptr){
 	ptr->dda.hit = 0;
 	ptr->dda.mapx = (int)ptr->camera.pos.cord.x;
 	ptr->dda.mapy = (int)ptr->camera.pos.cord.y;
-	ptr->dda.deltadist.x = 1 / ((ptr->camera.dir.cord.x == 0) * 1e30 + ptr->camera.dir.cord.x);
-	ptr->dda.deltadist.y = 1 / ((ptr->camera.dir.cord.y == 0) * 1e30 + ptr->camera.dir.cord.y);
+	ptr->dda.deltadist.x = (ptr->camera.ray.dir.cord.x == 0)?1e30 : abs(ptr->camera.ray.dir.cord.x);
+	ptr->dda.deltadist.y = (ptr->camera.ray.dir.cord.y == 0)?1e30 : abs(ptr->camera.ray.dir.cord.y);
 	ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->camera.pos.cord.x - ptr->dda.mapx);
 	ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->camera.pos.cord.y - ptr->dda.mapy);
 	ptr->dda.stepx = -1;
@@ -87,10 +87,6 @@ void ultimate_dda(t_raycast *ptr){
 			ptr->dda.mapx += ptr->dda.stepx;
 			ptr->dda.side = EW;
 		}
-		if(ptr->dda.mapx >= MAP_W || ptr->dda.mapy >= MAP_H){
-			fprintf(stderr, "out of range of map array\n");
-			break;
-		}
 		ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
 	}
 	fprintf(stream_debug, "sidedistx->%f\tdeltax->%f\n", ptr->dda.sidedist.x, ptr->dda.deltadist.x);
@@ -101,7 +97,16 @@ void ultimate_dda(t_raycast *ptr){
 }
 
 void draw_wall(t_raycast *ptr, int x){
-	
+	int lineh = (int)(HEIGHT/ptr->dda.perpwalldist);
+	int start, end;
+
+	start = (int)(-lineh / 2.0 )+ (int)(HEIGHT/2.0);
+	if(start < 0)
+		start = 0;
+	end = (int)(lineh / 2.0)  + (HEIGHT / 2.0);
+	if(end >= HEIGHT)
+		end = HEIGHT - 1;
+	draw_line(ptr,(t_cord){x, start}, (t_cord){x, end}, 0xff00ff);
 }
 
 void	raycast(t_raycast *ptr){
@@ -110,15 +115,15 @@ void	raycast(t_raycast *ptr){
 
 	x = 0;
 	cam = &ptr->camera;
-	cam->ray.origin = cam->pos;
-	debug_draw_map(ptr);
+	// debug_draw_map(ptr);
 	while(x < WIDTH){
+		cam->ray.origin = cam->pos;
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
-		cam->ray.dir.cord.x = cam->dir.cord.x + cam->plane.cord.x * ptr->camera.planx;
-		cam->ray.dir.cord.y = cam->dir.cord.y + cam->plane.cord.y * ptr->camera.planx;
-		debug_draw_rays(ptr,cam->ray);
+		cam->ray.dir.cord.x = cam->dir.cord.x + (cam->plane.cord.x * ptr->camera.planx);
+		cam->ray.dir.cord.y = cam->dir.cord.y + (cam->plane.cord.y * ptr->camera.planx);
+		// debug_draw_rays(ptr,cam->ray);
 		ultimate_dda(ptr);
-		// draw_wall(ptr, x);
+		draw_wall(ptr, x);
 		x++;
 	}
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
