@@ -58,16 +58,12 @@ void init_dda(t_raycast *ptr){
 	ptr->dda.hit = 0;
 	ptr->dda.mapx = (int)ptr->camera.pos.cord.x;
 	ptr->dda.mapy = (int)ptr->camera.pos.cord.y;
-	ptr->dda.deltadist.x = (ptr->camera.ray.dir.cord.x == 0)?1e30 : abs(ptr->camera.ray.dir.cord.x);
-	ptr->dda.deltadist.y = (ptr->camera.ray.dir.cord.y == 0)?1e30 : abs(ptr->camera.ray.dir.cord.y);
+	ptr->dda.deltadist.x = (ptr->camera.ray.dir.cord.x == 0)?1e30 : abs(1/ptr->camera.ray.dir.cord.x);
+	ptr->dda.deltadist.y = (ptr->camera.ray.dir.cord.y == 0)?1e30 : abs(1/ptr->camera.ray.dir.cord.y);
 	ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->camera.pos.cord.x - ptr->dda.mapx);
 	ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->camera.pos.cord.y - ptr->dda.mapy);
 	ptr->dda.stepx = -1;
 	ptr->dda.stepy = -1;
-}
-
-void ultimate_dda(t_raycast *ptr){
-	init_dda(ptr);
 	if(ptr->camera.ray.dir.cord.x >= 0){
 		ptr->dda.stepx = 1;
 		ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->dda.mapx + 1 - ptr->camera.pos.cord.x);
@@ -76,6 +72,10 @@ void ultimate_dda(t_raycast *ptr){
 		ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->dda.mapy + 1 - ptr->camera.pos.cord.y);
 		ptr->dda.stepy = 1;
 	}
+}
+
+void ultimate_dda(t_raycast *ptr){
+	init_dda(ptr);
 	while(!ptr->dda.hit){
 		if(ptr->dda.sidedist.x > ptr->dda.sidedist.y){
 			ptr->dda.sidedist.y += ptr->dda.deltadist.y;
@@ -99,13 +99,18 @@ void ultimate_dda(t_raycast *ptr){
 void draw_wall(t_raycast *ptr, int x){
 	int lineh = (int)(HEIGHT/ptr->dda.perpwalldist);
 	int start, end;
-
+	int y = 0;
 	start = (int)(-lineh / 2.0 )+ (int)(HEIGHT/2.0);
 	if(start < 0)
 		start = 0;
+	while(y < start)
+		my_mlx_pixel_put(&ptr->img, x,y++, 0xffff);
 	end = (int)(lineh / 2.0)  + (HEIGHT / 2.0);
 	if(end >= HEIGHT)
 		end = HEIGHT - 1;
+	y = end;
+	while(y < HEIGHT)
+		my_mlx_pixel_put(&ptr->img, x,y++, 0xffff10);
 	draw_line(ptr,(t_cord){x, start}, (t_cord){x, end}, 0xff00ff);
 }
 
@@ -115,7 +120,6 @@ void	raycast(t_raycast *ptr){
 
 	x = 0;
 	cam = &ptr->camera;
-	// debug_draw_map(ptr);
 	while(x < WIDTH){
 		cam->ray.origin = cam->pos;
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
