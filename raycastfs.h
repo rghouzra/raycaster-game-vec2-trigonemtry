@@ -49,7 +49,6 @@ typedef struct s_dda{
 	int stepx, stepy;
 	int mapx, mapy;
 	int hit;
-	t_camera camera;
 	int side;
 }t_dda;
 
@@ -73,5 +72,6 @@ void fillrec(t_raycast *ptr, t_cord begin ,t_cord end, int color);
 void fillrecborders(t_raycast *ptr, t_cord begin ,t_cord end, int color);
 void raycast(t_raycast *ptr);
 void draw_line(t_raycast *ptr, t_cord begin, t_cord end, int color);
+void debug_draw_map(t_raycast *p);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif

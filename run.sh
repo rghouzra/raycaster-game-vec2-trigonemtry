@@ -10,7 +10,7 @@ else
 	if [ $(users) == "redaghouzraf" ]; then
 		export bool="true"
 		cp /Users/redaghouzraf/Downloads/minilibx_opengl_20191021/libmlx.a .
-		export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm -g -fsanitize=address"
+		export FLAGS="-framework OpenGL -framework  AppKit -framework GLUT -lm -g"
 		export lib="libmlx.a"
 		export inc="-I /Users/redaghouzraf/Downloads/minilibx_opengl_20191021/"
 	fi
@@ -21,7 +21,7 @@ else
 			export FLAGS+=" -lmlx -DINC=0"
 		fi
 	fi
-	clang -Wall -Wextra -g -fsanitize=address main.c raycast.c hooks.c ray_utils.c draw_utils.c vector_utils.c $inc $lib $FLAGS -o raycaster
+	clang -Wall -Wextra -g main.c raycast.c hooks.c ray_utils.c draw_utils.c vector_utils.c $inc $lib $FLAGS -o raycaster
 	unset FLAGS
 	unset inc
 	unset lib

@@ -53,17 +53,8 @@ void init_camera(t_camera *camera){
 		camera->plane.cord.y -=  ((camera->plane.cord.y >= 0) * 0.34 ) + ((camera->plane.cord.y < 0) * -0.34);
 }
 
-int mouse_press(int button, int x, int y, void *p){
-	(void)button;
-	(void)x;
-	(void)y;
-	t_raycast *ptr = (t_raycast *)p;
-	ptr->camera.pos.cord = (t_cord){x, y};
-	clear_screen(ptr, 0x0);
-	raycast(ptr);
-	return 0;
-}
 FILE *stream_debug;
+
 
 int main()
 {
