@@ -76,7 +76,8 @@ void init_dda(t_raycast *ptr){
 
 void ultimate_dda(t_raycast *ptr){
 	init_dda(ptr);
-	while(!ptr->dda.hit){
+	int count = 0;
+	while(!ptr->dda.hit && count < 50){
 		if(ptr->dda.sidedist.x > ptr->dda.sidedist.y){
 			ptr->dda.sidedist.y += ptr->dda.deltadist.y;
 			ptr->dda.mapy += ptr->dda.stepy;
@@ -88,6 +89,7 @@ void ultimate_dda(t_raycast *ptr){
 			ptr->dda.side = EW;
 		}
 		ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
+		count ++;
 	}
 	fprintf(stream_debug, "sidedistx->%f\tdeltax->%f\n", ptr->dda.sidedist.x, ptr->dda.deltadist.x);
 	fprintf(stream_debug, "sidedisty->%f\tdeltay->%f\n", ptr->dda.sidedist.y, ptr->dda.deltadist.y);
