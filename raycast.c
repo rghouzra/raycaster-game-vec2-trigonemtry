@@ -26,15 +26,16 @@ void debug_draw_map(t_raycast *p){
 		j = 0;
 		while(j < MAP_W){
 				if(j == (int)p->camera.pos.cord.x && i == (int)p->camera.pos.cord.y)
-					fillrec(p, (t_cord){
-						j*GSIZE, i*GSIZE
-					},
+				{
+					fillrec(p, (t_cord){j*GSIZE, i*GSIZE},
 					(t_cord){
 						(j*GSIZE) + 50,
 						(i*GSIZE)+50
 					},
 						0xffff20
 					);
+					draw_line(p, (t_cord){j*GSIZE, i*GSIZE}, op_two_vectors((t_vec2){.cord = (t_cord){j*GSIZE, i*GSIZE}},scaleVec(p->camera.dir, 40) ,ADD).cord, 0xff00f);
+				}
 				else
 					fillrec(p, (t_cord){
 						.x = j * GSIZE,
@@ -91,8 +92,6 @@ void ultimate_dda(t_raycast *ptr){
 		ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
 		count ++;
 	}
-	fprintf(stream_debug, "sidedistx->%f\tdeltax->%f\n", ptr->dda.sidedist.x, ptr->dda.deltadist.x);
-	fprintf(stream_debug, "sidedisty->%f\tdeltay->%f\n", ptr->dda.sidedist.y, ptr->dda.deltadist.y);
 	ptr->dda.perpwalldist = ((ptr->dda.sidedist.x - ptr->dda.deltadist.x) * (ptr->dda.side == EW)) + \
 	((ptr->dda.sidedist.y - ptr->dda.deltadist.y) * (ptr->dda.side == NS));
 	fflush(stream_debug);
@@ -132,5 +131,6 @@ void	raycast(t_raycast *ptr){
 		draw_wall(ptr, x);
 		x++;
 	}
+	debug_draw_map(ptr);
 	mlx_put_image_to_window(ptr->ptr, ptr->ptr_win,ptr->img.img,0, 0);
 }
