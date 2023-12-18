@@ -74,7 +74,7 @@ int main()
 	holder->img.addr = mlx_get_data_addr(holder->img.img, &holder->img.bits_per_pixel, \
 	&holder->img.line_length, &holder->img.endian);
 	init_camera(&holder->camera);
-	debug_draw_map(holder);
+	// debug_draw_map(holder);
 	raycast(holder);
 	mlx_key_hook(holder->ptr_win, key_press, holder);
 	// mlx_mouse_hook(holder->ptr_win, mouse_press, holder);
