@@ -59,10 +59,8 @@ void init_dda(t_raycast *ptr){
 	ptr->dda.hit = 0;
 	ptr->dda.mapx = (int)ptr->camera.pos.cord.x;
 	ptr->dda.mapy = (int)ptr->camera.pos.cord.y;
-	ptr->dda.deltadist.x = (ptr->camera.ray.dir.cord.x == 0)?1e30 : abs(1/ptr->camera.ray.dir.cord.x);
-	ptr->dda.deltadist.y = (ptr->camera.ray.dir.cord.y == 0)?1e30 : abs(1/ptr->camera.ray.dir.cord.y);
-	// fprintf(stream_debug,"%f\t%f\n", ptr->dda.deltadist.x,ptr->dda.deltadist.y);
-	// fflush(stream_debug);
+	ptr->dda.deltadist.x = (ptr->camera.ray.dir.cord.x == 0)? 1e30 : abs(1/ptr->camera.ray.dir.cord.x);
+	ptr->dda.deltadist.y = (ptr->camera.ray.dir.cord.y == 0)? 1e30 : abs(1/ptr->camera.ray.dir.cord.y);
 	ptr->dda.sidedist.x = ptr->dda.deltadist.x * (ptr->camera.pos.cord.x - ptr->dda.mapx);
 	ptr->dda.sidedist.y = ptr->dda.deltadist.y * (ptr->camera.pos.cord.y - ptr->dda.mapy);
 	ptr->dda.stepx = -1;
@@ -80,8 +78,6 @@ void init_dda(t_raycast *ptr){
 void ultimate_dda(t_raycast *ptr){
 	init_dda(ptr);
 	int count = 0;
-	fprintf(stderr, "before calculating inside dda\n");
-	fflush(stderr);
 	while(!ptr->dda.hit && count < MAP_H + MAP_W+1){
 		if(ptr->dda.sidedist.x > ptr->dda.sidedist.y){
 			ptr->dda.sidedist.y += ptr->dda.deltadist.y;
@@ -96,11 +92,8 @@ void ultimate_dda(t_raycast *ptr){
 		ptr->dda.hit = (map[ptr->dda.mapy][ptr->dda.mapx] != 0);
 		count ++;
 	}
-	fprintf(stderr, "after calculating inside dda\n");
-	fflush(stderr);
 	ptr->dda.perpwalldist = ((ptr->dda.sidedist.x - ptr->dda.deltadist.x) * (ptr->dda.side == EW)) + \
 	((ptr->dda.sidedist.y - ptr->dda.deltadist.y) * (ptr->dda.side == NS));
-	// fflush(stream_debug);
 }
 
 void draw_wall(t_raycast *ptr, int x){
@@ -133,15 +126,8 @@ void	raycast(t_raycast *ptr){
 		ptr->camera.planx = (double)2 * x/ (double)WIDTH - (double)1;
 		cam->ray.dir.cord.x = cam->dir.cord.x + (cam->plane.cord.x * ptr->camera.planx);
 		cam->ray.dir.cord.y = cam->dir.cord.y + (cam->plane.cord.y * ptr->camera.planx);
-		// debug_draw_rays(ptr,cam->ray);
-		fprintf(stderr, "%d: before dda\n", i);
-		fflush(stderr);
 		ultimate_dda(ptr);
-		fprintf(stderr, "%d: finish dda\n", i);
-		fflush(stderr);
 		draw_wall(ptr, x);
-		fprintf(stderr, "%d: after draw wall\n", i);
-		fflush(stderr);
 		x++;
 	}
 	// debug_draw_map(ptr);

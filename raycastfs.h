@@ -20,7 +20,7 @@
 # define abs(N)((N > 0) ? (N) : (-N))
 # define WIDTH 800
 # define HEIGHT 800
-# define MAP_H 20
+# define MAP_H 30
 #define GSIZE 10
 # define MAP_W 20
 # define degree_to_rad(x)((x) * M_PI / 180.0)
