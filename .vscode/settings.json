@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "libc.h": "c",
-        "raycastfs.h": "c"
-    }
-}
