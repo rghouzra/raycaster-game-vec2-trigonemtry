@@ -45,3 +45,5 @@ In the mandatory part, a raycaster is implemented using pure vector relations. T
 ![Screenshot 1](assets/image2.png)
 
 ![Screenshot 2](assets/image1.png)
+
+![Screenshot 3](assets/image3.png)
