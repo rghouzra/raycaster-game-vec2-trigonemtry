@@ -6,7 +6,7 @@
 /*   By: rghouzra <rghouzra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 23:03:35 by yrhiba            #+#    #+#             */
-/*   Updated: 2024/01/21 15:08:36 by rghouzra         ###   ########.fr       */
+/*   Updated: 2024/01/21 19:17:53 by rghouzra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "my_list.h"
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>

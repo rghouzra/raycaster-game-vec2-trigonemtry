@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yrhiba <yrhiba@student.1337.ma>            +#+  +:+       +#+         #
+#    By: rghouzra <rghouzra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/11 00:12:42 by yrhiba            #+#    #+#              #
-#    Updated: 2024/01/17 15:10:03 by yrhiba           ###   ########.fr        #
+#    Updated: 2024/01/21 19:18:01 by rghouzra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,12 +72,14 @@ INC =	header.h
 LIBS =	B-libs/libft/libft.a \
 		B-libs/libgetnextline/libgetnextline.a \
 		B-libs/libmylist/libmylist.a \
+		../minilibx/libmlx.a \
 		B-libs/libmystr/libmystr.a
 
 OBJS_INCS = -I. \
 			-I B-libs/libft \
 			-I B-libs/libgetnextline \
 			-I B-libs/libmylist \
+			-I ../minilibx \
 			-I B-libs/libmystr
 
 OBJS = $(SRCS:.c=.o)
@@ -86,7 +88,7 @@ CC = cc
 
 FLAGS = -Wall -Wextra #-g -fsanitize=address
 
-MLX_DEPENDS = -lm -lmlx -framework OpenGL -framework AppKit
+MLX_DEPENDS = -lm -framework OpenGL -framework AppKit
 
 all :
 	make make_libs
@@ -111,11 +113,12 @@ make_libs:
 	make -C B-libs/libgetnextline
 	make -C B-libs/libmylist
 	make -C B-libs/libmystr
-
+	make -C ../minilibx
 clean_libs:
 	make fclean -C B-libs/libft
 	make fclean -C B-libs/libgetnextline
 	make fclean -C B-libs/libmylist
 	make fclean -C B-libs/libmystr
+	make clean -C ../minilibx
 
 .PHONY : all clean fclean re make_libs clean_libs
