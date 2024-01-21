@@ -31,7 +31,7 @@ In the mandatory part, a raycaster is implemented using pure vector relations. T
 
    Example adjustment:
    ```
-   2 * windowHeight / perpWallDist
+   1.5 * windowHeight / perpWallDist
    ```
 
 ## Resources
