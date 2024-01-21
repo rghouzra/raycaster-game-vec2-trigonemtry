@@ -6,7 +6,7 @@
 #    By: rghouzra <rghouzra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/11 00:12:42 by yrhiba            #+#    #+#              #
-#    Updated: 2024/01/21 15:17:05 by rghouzra         ###   ########.fr        #
+#    Updated: 2024/01/21 15:31:16 by rghouzra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ LIBS =	B-libs/libft/libft.a \
 		B-libs/libgetnextline/libgetnextline.a \
 		B-libs/libmylist/libmylist.a \
 		B-libs/libmystr/libmystr.a \
+		../minilibx/libmlx.a \
 		B-libs/libmath/libmath.a
 
 OBJS_INCS = -I. \
@@ -61,6 +62,7 @@ OBJS_INCS = -I. \
 			-I B-libs/libgetnextline \
 			-I B-libs/libmylist \
 			-I B-libs/libmystr \
+			-I ../minilibx \
 			-I B-libs/libmath
 
 OBJS = $(SRCS:.c=.o)
@@ -69,7 +71,7 @@ CC = cc
 
 FLAGS = -Wall -Wextra #-g -fsanitize=address
 
-MLX_DEPENDS = -lm -lmlx -framework OpenGL -framework AppKit
+MLX_DEPENDS = -lm -framework OpenGL -framework AppKit
 
 all :
 	make make_libs
@@ -95,6 +97,7 @@ make_libs:
 	make -C B-libs/libmylist
 	make -C B-libs/libmystr
 	make -C B-libs/libmath
+	make -C ../minilibx
 
 clean_libs:
 	make fclean -C B-libs/libft
@@ -102,5 +105,6 @@ clean_libs:
 	make fclean -C B-libs/libmylist
 	make fclean -C B-libs/libmystr
 	make fclean -C B-libs/libmath
+	make clean -C ../minilibx
 
 .PHONY : all clean fclean re make_libs clean_libs

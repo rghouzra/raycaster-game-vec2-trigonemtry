@@ -6,7 +6,7 @@
 /*   By: rghouzra <rghouzra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 23:03:35 by yrhiba            #+#    #+#             */
-/*   Updated: 2024/01/21 15:17:48 by rghouzra         ###   ########.fr       */
+/*   Updated: 2024/01/21 15:31:26 by rghouzra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "vector.h"
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>
