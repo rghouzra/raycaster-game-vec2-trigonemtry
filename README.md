@@ -40,4 +40,8 @@ In the mandatory part, a raycaster is implemented using pure vector relations. T
 - [Video Tutorial by javidx9](https://youtu.be/NbSee-XM7WA?si=sakiJoIp4JPn1EAO)
 - [Video Tutorial by Bisqwit](https://youtu.be/DFZnzCbmlng?si=VJls_dOO_ILik_ib)
 
-Feel free to explore these resources for a deeper understanding of raycasting techniques and implementation.
+### In-Game Screenshots
+
+![Screenshot 1](assets/image2.png)
+
+![Screenshot 2](assets/image1.png)
