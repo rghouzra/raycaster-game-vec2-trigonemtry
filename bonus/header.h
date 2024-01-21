@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrhiba <yrhiba@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: rghouzra <rghouzra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 23:03:35 by yrhiba            #+#    #+#             */
-/*   Updated: 2024/01/17 15:11:40 by yrhiba           ###   ########.fr       */
+/*   Updated: 2024/01/21 15:08:36 by rghouzra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 730
 # define FOOTER_HEIGHT 0
-# define WIN_TITLE "Easy-long-cub3d"
+# define WIN_TITLE "cubPId"
 /* WINDOW MACROS */
 
 /*animated-sprite*/
