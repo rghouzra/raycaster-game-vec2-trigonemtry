@@ -14,7 +14,6 @@
 
 int	redcrosspressed(t_data *data)
 {
-	clear_data(&data);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
