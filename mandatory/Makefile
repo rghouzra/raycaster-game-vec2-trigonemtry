@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yrhiba <yrhiba@student.1337.ma>            +#+  +:+       +#+         #
+#    By: rghouzra <rghouzra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/11 00:12:42 by yrhiba            #+#    #+#              #
-#    Updated: 2024/01/18 11:31:36 by yrhiba           ###   ########.fr        #
+#    Updated: 2024/01/21 15:17:05 by rghouzra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SRCS =	main.c \
 		1-frame-module/frame_get_color.c \
 		2-mlx-module/init_mlx.c \
 		2-mlx-module/events/keypressdown.c \
-		2-mlx-module/events/keypressdup.c \
 		2-mlx-module/events/redcrosspressed.c \
 		3-parsing-module/do_parsing.c \
 		3-parsing-module/read_file_content.c \
@@ -35,7 +34,6 @@ SRCS =	main.c \
 		3-parsing-module/do_parsing_2.c \
 		3-parsing-module/check_for_map_2.c \
 		3-parsing-module/check_line_2.c \
-		4-game-module/update_player.c \
 		5-raycasting-module/cast_all_rays.c \
 		A-utils/getcolor.c \
 		A-utils/exit_failure.c \

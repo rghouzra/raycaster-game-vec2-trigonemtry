@@ -6,7 +6,7 @@
 /*   By: rghouzra <rghouzra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 23:03:35 by yrhiba            #+#    #+#             */
-/*   Updated: 2024/01/21 15:09:13 by rghouzra         ###   ########.fr       */
+/*   Updated: 2024/01/21 15:17:48 by rghouzra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,6 @@ typedef struct s_player
 {
 	t_vector	pos;
 	t_vector	minmap_pos;
-	int			look_direction;
-	int			turn_direction;
-	int			walk_direction;
-	float		rotation_angle;
-	int			walk_speed;
-	float		turn_speed;
 
 }				t_player;
 
@@ -146,47 +140,6 @@ typedef struct s_ray
 {
 	t_vec2		origin;
 	t_vec2		dir;
-
-	float		ray_angle;
-	t_vector	wall_hit;
-	float		distance;
-	bool		was_hit_vertical;
-	float		distance_wallv;
-	bool		was_hit_horizantal;
-	float		distance_wallh;
-	bool		is_facing_up;
-	bool		is_facing_down;
-	bool		is_facing_left;
-	bool		is_facing_right;
-	char		hit_content;
-	char		hit_v_content;
-	char		hit_h_content;
-
-	/*cast-ray-vars-utils*/
-	float		xintercept;
-	float		yintercept;
-	float		xstep;
-	float		ystep;
-	float		next_horz_touch_x;
-	float		next_horz_touch_y;
-	float		horz_wall_hit_x;
-	float		horz_wall_hit_y;
-	float		next_vert_touch_x;
-	float		next_vert_touch_y;
-	float		vert_wall_hit_x;
-	float		vert_wall_hit_y;
-	float		x_to_check;
-	float		y_to_check;
-	/*cast-ray-vars-utils*/
-	/*project-wall-utils*/
-	float		correct_wall_dis;
-	float		wall_height;
-	float		start_row;
-	float		end_row;
-	t_frame		*tex;
-	int			texture_x;
-	int			texture_y;
-	/*project-wall-utils*/
 }				t_ray;
 
 typedef struct s_camera
@@ -244,10 +197,8 @@ typedef struct s_data
 	int			map_width;
 	int			map_height;
 	t_player	*player;
-	t_textures	textures;
 	t_color		floor_color;
 	t_color		ceiling_color;
-	t_ray		rays[WIN_WIDTH];
 	t_my_list	*map_file_lines;
 	t_my_list	*map_only_lines;
 	bool		ceiling_color_given;
@@ -263,10 +214,10 @@ typedef struct s_data
 	int			fps_counted;
 	char		*fs;
 	t_frame		no_tex;
+	t_textures		textures;
 	t_frame		so_tex;
 	t_frame		ea_tex;
 	t_frame		we_tex;
-	t_frame		door_tex;
 	t_my_list	*doors;
 }				t_data;
 

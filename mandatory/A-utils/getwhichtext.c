@@ -6,7 +6,7 @@
 /*   By: rghouzra <rghouzra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:52:15 by rghouzra          #+#    #+#             */
-/*   Updated: 2024/01/18 17:43:58 by rghouzra         ###   ########.fr       */
+/*   Updated: 2024/01/21 15:18:16 by rghouzra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ t_frame	getwhichtext(t_data *data)
 		else
 			return (data->we_tex);
 	}
-	return (data->door_tex);
+	return (data->we_tex);
 }
