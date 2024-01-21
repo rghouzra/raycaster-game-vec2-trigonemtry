@@ -49,5 +49,6 @@
 modules.order
 Module.symvers
 Mkfile.old
+.vscode
 dkms.conf
 debug.txt
