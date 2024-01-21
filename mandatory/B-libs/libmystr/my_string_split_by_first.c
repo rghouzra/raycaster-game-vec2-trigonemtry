@@ -44,14 +44,12 @@ char	**my_string_split_by_first(char *s, char *del)
 {
 	char	**r;
 	int		indexs[4];
-	int		tmp;
 
 	r = (char **)malloc(sizeof(char *) * 3);
 	if (!r)
 		return (NULL);
 	r[2] = NULL;
 	find_spliters_(s, del, indexs);
-	tmp = my_string_len(del);
 	r[0] = my_string_sub(s, indexs[0], indexs[1] - indexs[0]);
 	r[1] = my_string_sub(s, indexs[2], indexs[3] - indexs[2]);
 	if (!r[0])

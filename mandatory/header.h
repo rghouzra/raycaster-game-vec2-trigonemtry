@@ -48,7 +48,7 @@
 /*N-S-W-E*/
 
 /* WINDOW MACROS */
-# define WIN_WIDTH 1920
+# define WIN_WIDTH 1080
 # define WIN_HEIGHT 1080
 # define FOOTER_HEIGHT 0
 # define WIN_TITLE "cubPId"
