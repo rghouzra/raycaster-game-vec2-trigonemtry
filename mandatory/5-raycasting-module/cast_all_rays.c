@@ -116,7 +116,7 @@ void	draw_wall(t_data *data, int x)
 	y = 0;
 	if (data->dda.perpwalldist == 0)
 		data->dda.perpwalldist = 1;
-	data->wall.lineh = ((int)(WIN_HEIGHT / data->dda.perpwalldist));
+	data->wall.lineh = ((int)(1.3 * WIN_HEIGHT / data->dda.perpwalldist));
 	height_half = (WIN_HEIGHT / 2.0);
 	line_half = data->wall.lineh / 2.0;
 	data->wall.start = (int)(height_half) - (int)(line_half);
