@@ -73,11 +73,9 @@ void	rayintersect(t_data *data){
 	data->camera.ray.dir.cord.x += ((data->camera.ray.dir.cord.x == 0) * 0.01);
 	data->camera.ray.dir.cord.y += ((data->camera.ray.dir.cord.y == 0) * 0.01);
 	data->dda.perpwalldist = (((data->dda.mapx - data->camera.pos.cord.x + \
-	(1 - data->dda.stepx) / 2) / data->camera.ray.dir.cord.x) * \
-	(data->dda.side == EW)) \
-	+ (((data->dda.mapy - data->camera.pos.cord.y \
-	+ (1 - data->dda.stepy) / 2) / \
-	data->camera.ray.dir.cord.y) * (data->dda.side == NS));
+	(1 - data->dda.stepx) / 2) / data->camera.ray.dir.cord.x) * (data->dda.side == EW));
+	data->dda.perpwalldist += (((data->dda.mapy - data->camera.pos.cord.y \
+	+ (1 - data->dda.stepy) / 2) / data->camera.ray.dir.cord.y) * (data->dda.side == NS));
 }
 
 void	draw_text(t_data *data, int x, t_frame	tex, int y){
