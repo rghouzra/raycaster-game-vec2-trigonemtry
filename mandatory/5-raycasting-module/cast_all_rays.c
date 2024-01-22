@@ -12,8 +12,7 @@
 
 #include "header.h"
 
-void	init_dda(t_data *data)
-{
+void	init_dda(t_data *data){
 	if (data->camera.ray.dir.cord.x == 0)
 		data->dda.deltadist.x = 1e30;
 	else
@@ -53,8 +52,7 @@ PH : PD = AH : DE
 -> (mapY - posY + (1 - stepY) / 2) / raydirY = PerpWallDist
 */
 
-void	rayintersect(t_data *data)
-{
+void	rayintersect(t_data *data){
 	init_dda(data);
 	while (!data->dda.hit && ++data->dda.count < 1e3)
 	{
@@ -82,8 +80,7 @@ void	rayintersect(t_data *data)
 	data->camera.ray.dir.cord.y) * (data->dda.side == NS));
 }
 
-void	draw_text(t_data *data, int x, t_frame	tex, int y)
-{
+void	draw_text(t_data *data, int x, t_frame	tex, int y){
 	y = data->wall.start;
 	tex = getwhichtext(data);
 	if (data->dda.side == EW)
@@ -107,8 +104,7 @@ void	draw_text(t_data *data, int x, t_frame	tex, int y)
 	}
 }
 
-void	draw_wall(t_data *data, int x)
-{
+void	draw_wall(t_data *data, int x){
 	int		y;
 	double	height_half;
 	double	line_half;
@@ -136,8 +132,7 @@ void	draw_wall(t_data *data, int x)
 	draw_text(data, x, getwhichtext(data), 0);
 }
 
-void	cast_all_rays(t_data *data)
-{
+void	cast_all_rays(t_data *data){
 	int			x;
 	t_camera	*cam;
 
