@@ -17,7 +17,8 @@
 # define DEBUG 0
 /* DEDUG ON/OFF */
 
-# define SCALE 0.4
+# define SCALE_MOVE 0.8
+# define SCALE_ROT 6.8
 
 # include "get_next_line.h"
 # include "libft.h"
