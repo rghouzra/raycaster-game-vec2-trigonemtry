@@ -19,13 +19,13 @@ void	movebackandfront(int keycode, t_data *data)
 
 	if (keycode == W_KEY)
 	{
-		x = data->camera.pos.cord.x + scalevec(data->camera.dir, SCALE).cord.x;
-		y = data->camera.pos.cord.y + scalevec(data->camera.dir, SCALE).cord.y;
+		x = data->camera.pos.cord.x + scalevec(data->camera.dir, SCALE_MOVE).cord.x;
+		y = data->camera.pos.cord.y + scalevec(data->camera.dir, SCALE_MOVE).cord.y;
 	}
 	else if (keycode == S_KEY)
 	{
-		x = data->camera.pos.cord.x - scalevec(data->camera.dir, SCALE).cord.x;
-		y = data->camera.pos.cord.y - scalevec(data->camera.dir, SCALE).cord.y;
+		x = data->camera.pos.cord.x - scalevec(data->camera.dir, SCALE_MOVE).cord.x;
+		y = data->camera.pos.cord.y - scalevec(data->camera.dir, SCALE_MOVE).cord.y;
 	}
 	else
 		return ;
@@ -46,16 +46,16 @@ void	moveleftright(int keycode, t_data *data)
 	if (keycode == D_KEY)
 	{
 		x = data->camera.pos.cord.x + scalevec(data->camera.plane,
-				SCALE).cord.x;
+				SCALE_MOVE).cord.x;
 		y = data->camera.pos.cord.y + scalevec(data->camera.plane,
-				SCALE).cord.y;
+				SCALE_MOVE).cord.y;
 	}
 	else if (keycode == A_KEY)
 	{
 		x = data->camera.pos.cord.x - scalevec(data->camera.plane,
-				SCALE).cord.x;
+				SCALE_MOVE).cord.x;
 		y = data->camera.pos.cord.y - scalevec(data->camera.plane,
-				SCALE).cord.y;
+				SCALE_MOVE).cord.y;
 	}
 	else
 		return ;
@@ -72,15 +72,15 @@ int	keypressdown(int keycode, t_data *data)
 		redcrosspressed(data);
 	if (keycode == RIGHT_KEY)
 	{
-		data->camera.dir = rotate_vec(data->camera.dir, degree_to_rad(10.1));
+		data->camera.dir = rotate_vec(data->camera.dir, degree_to_rad(1 * SCALE_ROT));
 		data->camera.plane = rotate_vec(data->camera.plane,
-				degree_to_rad(10.1));
+				degree_to_rad(1 * SCALE_ROT));
 	}
 	if (keycode == LEFT_KEY)
 	{
-		data->camera.dir = rotate_vec(data->camera.dir, degree_to_rad(-10.1));
+		data->camera.dir = rotate_vec(data->camera.dir, degree_to_rad(-1 * SCALE_ROT));
 		data->camera.plane = rotate_vec(data->camera.plane,
-				degree_to_rad(-10.1));
+				degree_to_rad(-1 * SCALE_ROT));
 	}
 	movebackandfront(keycode, data);
 	moveleftright(keycode, data);
