@@ -1,8 +1,8 @@
-NO ./D-textures/StoneUWHitlerD.xpm
-SO ./D-textures/StoneUWflagL.xpm
-WE ./D-textures/ea.xpm
-EA ./D-textures/so.xpm
-F   139,90, 43
+NO ./D-textures/wall_1.xpm
+SO ./D-textures/wall_2.xpm
+WE ./D-textures/wall_3.xpm
+EA ./D-textures/wall_4.xpm
+F   100,88, 0
 C  135, 206, 235
 
         1111111111111111111111111
